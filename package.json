@@ -1,0 +1,38 @@
+{
+  "name": "firesocket",
+  "version": "1.0.0",
+  "description": "A drop-in replacement for WebSocket using Firebase Realtime Database",
+  "main": "firesocket.js",
+  "scripts": {
+    "pretest": "eslint --fix *.js spec && tsc -p jsconfig.json",
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/darthwalsh/FireSocket.git"
+  },
+  "keywords": [
+    "websocket"
+  ],
+  "author": "Carl Walsh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/darthwalsh/FireSocket/issues"
+  },
+  "homepage": "https://github.com/darthwalsh/FireSocket#readme",
+  "devDependencies": {
+    "@types/firebase": "^3.2.1",
+    "@types/jasmine": "^3.4.0",
+    "@types/node": "^12.7.4",
+    "@types/ws": "^6.0.3",
+    "eslint": "^6.3.0",
+    "eslint-config-google": "^0.14.0",
+    "jasmine": "^3.4.0",
+    "jasmine-reporters": "^2.3.2",
+    "typescript": "^3.6.2",
+    "ws": "^7.1.2"
+  },
+  "dependencies": {
+    "firebase": "^6.6.0"
+  }
+}
