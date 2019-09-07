@@ -1,10 +1,14 @@
 {
     "compilerOptions": {
       "baseUrl": ".",
+      "skipLibCheck": true,
       "paths": { "*": ["types/*"] },
         "target": "esnext",
         "checkJs": true,
     },
+    "files": [
+        "node_modules/firebase/index.d.ts",
+    ],
     "exclude": [
         "node_modules",
         "coverage",

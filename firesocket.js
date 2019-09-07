@@ -1,8 +1,8 @@
 "use strict";
 
-// require("firebase/app");
+require("firebase");
 // require("firebase/auth");
-// require("firebase/firestore");
+require("firebase/database");
 
 class FireSocket {
   constructor(address) {
