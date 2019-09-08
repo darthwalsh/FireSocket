@@ -4,15 +4,13 @@
 
 class Socket {
   /**
-   * @param {firebase.database.Database} database
-   * @param {string} key
+   * @param {firebase.database.Reference} read
+   * @param {firebase.database.Reference} write
    */
-  constructor(database, key) {
-    this.database = database;
-    this.writeRef = this.database.ref(`user/${key}`);
-    const readRef = this.database.ref(`server/${key}`);
-    readRef.on("child_added", this.onMessage);
+  constructor(read, write) {
+    this.write = write;
     this.callbacks = new Map([["message", []]]);
+    setTimeout(() => read.on("child_added", ss => this.onMessage(ss)));
   }
 
   /**
@@ -27,12 +25,12 @@ class Socket {
    * @param {any} data of JSON-serializable values
    */
   send(data) {
-    this.writeRef.push().set(data);
+    this.write.push().set(data);
   }
 
   /**
     * @param {'message'} event
-    * @param {any} cb
+    * @param {({data: any}) => void} cb
     */
   addEventListener(event, cb) {
     const arr = this.callbacks.get(event);
@@ -49,22 +47,22 @@ class Server {
    */
   constructor(firebase) {
     this.database = firebase.database();
-    this.database.ref("server").on("child_added", this.onConnection);
     this.callbacks = new Map([["connection", []]]);
+    setTimeout(() => this.database.ref("user").on("child_added", ss => this.onConnection(ss)));
   }
 
   /**
    * @param {firebase.database.DataSnapshot} snapshot
    */
   onConnection(snapshot) {
-    const socket = new Socket(this.database, snapshot.key);
+    const socket = new Socket(this.database.ref(`user/${snapshot.key}`), this.database.ref(`sever/${snapshot.key}`));
     this.callbacks.get("connection").forEach(cb => cb(socket));
   }
 
 
   /**
   * @param {'connection'} event
-  * @param {any} cb
+  * @param {(socket: Socket) => void} cb
   */
   addEventListener(event, cb) {
     const arr = this.callbacks.get(event);

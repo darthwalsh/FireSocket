@@ -4,20 +4,24 @@ const Server = require("../server");
 
 const testing = require("@firebase/testing");
 const firebase = testing.initializeTestApp({
-  databaseName: "testdb",
-  auth: {}
+  databaseName: "testDb",
+  auth: {uid: "alice"},
 });
 
 describe("firesocket", () => {
   it("existing", async done => {
+    firebase.database().ref().set({user: {user1: {0: "message1"}}});
+
     const server = new Server(firebase);
 
-    firebase.database().ref("server").set({ server: { user1: { 0: "message1" } } });
-
-    const socket = await new Promise((res, rej) => {
-      server.addEventListener("connection", s => { res(s) });
+    const data = await new Promise((res, rej) => {
+      server.addEventListener("connection", socket => {
+        socket.addEventListener("message", o => res(o.data));
+      });
     });
 
-    expect(new FireSocket("abc.xyz").address).toBe("abc.xyz");
+    expect(data).toBe("message1");
+
+    done();
   });
 });
