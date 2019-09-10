@@ -1,6 +1,7 @@
 /* global describe it expect */
 
 const Server = require("../server");
+const Client = require("../client");
 
 const testing = require("@firebase/testing");
 const firebase = testing.initializeTestApp({
@@ -13,6 +14,10 @@ describe("firesocket", () => {
     firebase.database().ref().set({user: {user1: {0: "message1"}}});
 
     const server = new Server(firebase);
+
+    const client = new Client(firebase);
+
+    client.addEventListener("message");
 
     const data = await new Promise((res, rej) => {
       server.addEventListener("connection", socket => {
