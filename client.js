@@ -5,17 +5,16 @@ const Socket = require("./socket");
 
 class Client {
   /**
-   * @param {string} auth // TODO should use real firebase auth
+   * @param {string} auth // TODO(auth) should use real firebase auth
    * @param {firebase} firebase
    */
   constructor(auth, firebase) {
     this.auth = auth;
     this.database = firebase.database();
-    this.callbacks = new Map([
-      ["open", []],
-      ["close", []],
-      ["message", []]]);
-    setTimeout(() => this.database.ref("user").on("child_added", ss => this.onConnection(ss)));
+    this.callbacks = new Map([ // events not common with socket
+      ["open", []], // TODO fire the open event
+    ]);
+    this.socket = new Socket(this.database.ref(`server/${this.auth}`), this.database.ref(`user/${this.auth}`));
   }
 
   /**
@@ -30,10 +29,11 @@ class Client {
     */
   addEventListener(event, cb) {
     const arr = this.callbacks.get(event);
-    if (!arr) {
-      throw new Error(`Unsupported event type ${event}`);
+    if (arr) {
+      arr.push(cb);
+    } else {
+      this.socket.addEventListener(event, cb);
     }
-    arr.push(cb);
   }
 }
 
