@@ -39,3 +39,58 @@ describe("exiting message", () => {
     done();
   });
 });
+
+describe("sending", () => {
+  it("client to server", async done => {
+    await database.ref().set(null);
+
+    const data = [];
+    const server = new Server(firebase);
+    const client = new FireSocket("user1", firebase);
+    await new Promise((res, _) => {
+      server.addEventListener("connection", socket =>
+        socket.addEventListener("message", o => {
+          data.push(o.data);
+          if (data.length === 3) {
+            res();
+          }
+        }));
+      client.send("a");
+      client.send("b");
+      client.send("c");
+    });
+
+    expect(data).toEqual(["a", "b", "c"]);
+
+    done();
+  });
+
+  it("server to client", async done => {
+    await database.ref().set(null);
+
+    const data = [];
+    const server = new Server(firebase);
+    server.addEventListener("connection", socket => {
+      socket.send("a");
+      socket.send("b");
+      socket.send("c");
+    });
+
+    const client = new FireSocket("user1", firebase);
+
+    await new Promise((res, _) => {
+      client.addEventListener("message", o => {
+        data.push(o.data);
+        if (data.length === 3) {
+          res();
+        }
+      });
+    });
+
+    expect(data).toEqual(["a", "b", "c"]);
+
+    done();
+  });
+});
+
+// TODO test open event

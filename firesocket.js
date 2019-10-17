@@ -11,21 +11,23 @@ class FireSocket {
   constructor(auth, firebase) {
     this.auth = auth;
     this.database = firebase.database();
-    this.callbacks = new Map([ // events not common with socket
-      ["open", []], // TODO fire the open event
+    this.callbacks = new Map([ // events not in common with socket
+      ["open", []],
     ]);
-    this.socket = new Socket(this.database.ref(`server/${this.auth}`), this.database.ref(`user/${this.auth}`));
+    const write = this.database.ref(`user/${this.auth}`);
+    write.update({"__CONNECTION": true}, () => this.callbacks.get("open").forEach(cb => cb()));
+    this.socket = new Socket(this.database.ref(`server/${this.auth}`), write);
   }
 
   /**
     * @param {'open'} event
-    * @param {(socket: Socket) => void} cb
+    * @param {() => void} cb
     *//**
-    * @param {'close'} event
-    * @param {(socket: Socket) => void} cb
+    * @param {'close'} event //TODO
+    * @param {() => void} cb
     *//**
     * @param {'message'} event
-    * @param {(socket: Socket) => void} cb
+    * @param {({data: any}) => void} cb
     */
   addEventListener(event, cb) {
     const arr = this.callbacks.get(event);
@@ -34,6 +36,17 @@ class FireSocket {
     } else {
       this.socket.addEventListener(event, cb);
     }
+  }
+
+  /**
+   * @param {any} data of JSON-serializable values
+   * @param {undefined} [options] unsupported
+   */
+  send(data, options) {
+    if (options) {
+      throw Error("options unsupported");
+    }
+    this.socket.send(data);
   }
 }
 

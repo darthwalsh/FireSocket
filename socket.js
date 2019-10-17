@@ -15,6 +15,9 @@ class Socket {
    * @param {firebase.database.DataSnapshot} snapshot
    */
   onMessage(snapshot) {
+    if (snapshot.key === "__CONNECTION") { // TODO if switch to metadata records, create a kind for connection?
+      return;
+    }
     const data = snapshot.val();
     this.callbacks.get("message").forEach(cb => cb({data}));
   }

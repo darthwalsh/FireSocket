@@ -17,7 +17,7 @@ class Server {
    * @param {firebase.database.DataSnapshot} snapshot
    */
   onConnection(snapshot) {
-    const socket = new Socket(this.database.ref(`user/${snapshot.key}`), this.database.ref(`sever/${snapshot.key}`));
+    const socket = new Socket(this.database.ref(`user/${snapshot.key}`), this.database.ref(`server/${snapshot.key}`));
     this.callbacks.get("connection").forEach(cb => cb(socket));
   }
 
