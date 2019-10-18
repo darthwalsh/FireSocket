@@ -1,49 +1,66 @@
 # FireSocket
 
-A drop-in replacement for WebSocket using [Firebase Realtime Database](https://firebase.google.com/docs/database)
+A drop-in replacement for WebSocket using [Firebase Realtime Database](https://firebase.google.com/docs/database).
+
+## Example
+
+TODO
+
+## Installation
+
+`npm TODO`
 
 ### Roadmap to release 1.0
 - Basic parity with ws functionality
+  - ~~message~~
+  - ~~send~~
+  - ~~readyState~~
+  - close
 - A/B testing source compatibility between FireSocket and WebSocket
+- Server admin authentication, supporting example server app and cli
 - Client authentication
-- Server authentication, supporting example
-- Example express(?) server setup with HTTP serving the script file
-- npm limit files released
-- generate .d.ts 
+- Example express server setup with HTTP serving the script file
+- npm limit files for pack release
+- generate .d.ts prepack or something
   - Maybe use https://www.npmjs.com/package/tsd-jsdoc
   - Or use 3.7 beta of tsc? https://dev.to/open-wc/generating-typescript-definition-files-from-javascript-5bp2
 - set up CI/CD that builds/tests/publishes to npm
+- Any TODOs left in README
+- Any TODOs left in code, maybe won't fix
 
-
-
-## Copy-Paste from Austerity:
+## Motivation for client-server communication
 
 ### Websocket
-The default client-server communication, and by far the fastest.
+The default client-server communication, and by far the fastest. It's pretty simple for a [web game](https://github.com/darthwalsh/Austerity/blob/3bd2cfb825eaf8d537945c02da5b96bfe38ddca7/server/connection.js) to just update state and issue questions based on player events.
 
 Downsides:
 
-* Hosting servers don't allow many simultaneous connections, if any
-* Game state is not persisted, so a server reboot will wipe out any games
+* Cheap hosting servers don't allow many simultaneous connections, if any
+* Messages are not persisted, so a server reboot will wipe out any app state
 
 ### Firebase Database
 
-Using [Firebase Realtime Database](https://firebase.google.com/docs/database), it is possible to emulate the websocket messages. This gives the added benefit of messages being persisted in the database, so if the server restarts it can event-source its state from the database, and recover an active game without interaction from the client.
+Using [Firebase Realtime Database](https://firebase.google.com/docs/database), it is possible to emulate websocket messages. 
+
+This fixes both limitations:
+
+* Firebase is free for [100 connections users](https://firebase.google.com/pricing/), with pay-as-you-go up to 200k.
+* When the server restarts it can event-source state from the database
 
 Realtime Database was picked over Firestore because the average round trip latency of 600ms is fast enough to barely be noticed by users, while Firestore is noticeably slower at 1500ms.
-[source](https://medium.com/@d8schreiber/firebase-performance-firestore-and-realtime-database-latency-13effcade26d)
+[medium.com](https://medium.com/@d8schreiber/firebase-performance-firestore-and-realtime-database-latency-13effcade26d)
 
-[Info on Data Model, Auth, Queues](https://howtofirebase.com/firebase-data-modeling-939585ade7f4)
+Guide: [Info on Data Model, Auth, Queues](https://howtofirebase.com/firebase-data-modeling-939585ade7f4)
 
 #### Database Schema
 
 Each game is composed of messages from server to client, and v/v.
 
-Each firebase client listens for child_added on their message queue.
+Each firebase client listens for `child_added` on their message queue.
 
 Here, user* is a userID from Firebase Authentication
 
-    userMessage:
+    user:
         userWQ3mVT:
             0: Message: Connected to Game
             1: Choice: New Game, Refresh
@@ -52,7 +69,7 @@ Here, user* is a userID from Firebase Authentication
         user7f8pR:
             0: Message: Connected to Game
             1: Choice: New Game, Refresh, alice's game
-    serverMessage:
+    server:
         userWQ3mVT:
             0: Name: alice
             1: Choice: New Game
@@ -60,6 +77,8 @@ Here, user* is a userID from Firebase Authentication
         user7f8pR:
             0: Name: bob
             1: Choice: Refresh
+
+## TODO clean up from here down Copy-Paste:
 
 ### P1
 - [ ] Anonymous login (hopefully persists on refresh, or cache token in local storage?)

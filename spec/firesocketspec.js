@@ -93,4 +93,33 @@ describe("sending", () => {
   });
 });
 
-// TODO test open event
+describe("readyState", () => {
+  it("has properties", () => {
+    expect(FireSocket.CONNECTING).toBe(0);
+    expect(new FireSocket("user1", firebase).CONNECTING).toBe(0);
+  });
+
+  it("changes", async done => {
+    await database.ref().set(null);
+
+    const client = new FireSocket("user1", firebase);
+    expect(client.readyState).toBe(FireSocket.CONNECTING);
+
+    new Server(firebase);
+
+    const afterOpen = await new Promise((res, _) => {
+      client.addEventListener("open", () => {
+        res(client.readyState);
+      });
+    });
+    expect(afterOpen).toBe(FireSocket.OPEN);
+
+    // TODO test close
+
+    done();
+  });
+});
+
+// TODO the client open event should only fire when the server is connected
+
+// TODO test that close stops the db listening events? https://firebase.google.com/docs/database/web/read-and-write#detach_listeners

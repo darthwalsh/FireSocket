@@ -14,16 +14,35 @@ class FireSocket {
     this.callbacks = new Map([ // events not in common with socket
       ["open", []],
     ]);
+    this.readyState = FireSocket.CONNECTING;
     const write = this.database.ref(`user/${this.auth}`);
-    write.update({"__CONNECTION": true}, () => this.callbacks.get("open").forEach(cb => cb()));
+    write.update({"__CONNECTION": true}, () => this.onOpen());
     this.socket = new Socket(this.database.ref(`server/${this.auth}`), write);
+  }
+
+  onOpen() {
+    this.readyState = FireSocket.OPEN;
+    this.callbacks.get("open").forEach(cb => cb());
+  }
+
+  get CONNECTING() {
+    return FireSocket.CONNECTING;
+  }
+  get CLOSING() {
+    return FireSocket.CLOSING;
+  }
+  get CLOSED() {
+    return FireSocket.CLOSED;
+  }
+  get OPEN() {
+    return FireSocket.OPEN;
   }
 
   /**
     * @param {'open'} event
     * @param {() => void} cb
     *//**
-    * @param {'close'} event //TODO
+    * @param {'close'} event //TODO actually fire the close event and set the readyState
     * @param {() => void} cb
     *//**
     * @param {'message'} event
@@ -49,6 +68,11 @@ class FireSocket {
     this.socket.send(data);
   }
 }
+
+FireSocket.CONNECTING = 0;
+FireSocket.OPEN = 1;
+FireSocket.CLOSING = 2;
+FireSocket.CLOSED = 3;
 
 module.exports = FireSocket;
 
