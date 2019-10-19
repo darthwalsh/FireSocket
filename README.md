@@ -30,6 +30,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - Maybe use https://www.npmjs.com/package/tsd-jsdoc
   - Or use 3.7 beta of tsc? https://dev.to/open-wc/generating-typescript-definition-files-from-javascript-5bp2
 - set up CI/CD that builds/tests/publishes to npm
+    - https://medium.com/@Philmod/npm-release-automation-adb970e49066
 - [ ] firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
 - Any TODOs left in README
 - Any TODOs left in code, maybe won't fix
