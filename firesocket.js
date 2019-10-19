@@ -42,7 +42,7 @@ class FireSocket {
     * @param {'open'} event
     * @param {() => void} cb
     *//**
-    * @param {'close'} event //TODO actually fire the close event and set the readyState
+    * @param {'close'} event //TODO(close) actually fire the close event and set the readyState
     * @param {() => void} cb
     *//**
     * @param {'message'} event

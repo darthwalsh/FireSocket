@@ -4,27 +4,33 @@ A drop-in replacement for WebSocket using [Firebase Realtime Database](https://f
 
 ## Example
 
-TODO
+TODO(example) example snippet
+TODO(example) example code showing where to plugin public/secret firebase config
 
 ## Installation
 
-`npm TODO`
+`npm install` TODO(npm)
 
 ### Roadmap to release 1.0
 - Basic parity with ws functionality
   - ~~message~~
   - ~~send~~
   - ~~readyState~~
+  - open waits until server connects
   - close
 - A/B testing source compatibility between FireSocket and WebSocket
+- Database read/write limitations on user/server
 - Server admin authentication, supporting example server app and cli
+- Server lib for wiping some/all message state
 - Client authentication
+  - ? pluggable, so can swap to email/OAuth sign-in?
 - Example express server setup with HTTP serving the script file
 - npm limit files for pack release
 - generate .d.ts prepack or something
   - Maybe use https://www.npmjs.com/package/tsd-jsdoc
   - Or use 3.7 beta of tsc? https://dev.to/open-wc/generating-typescript-definition-files-from-javascript-5bp2
 - set up CI/CD that builds/tests/publishes to npm
+- [ ] firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
 - Any TODOs left in README
 - Any TODOs left in code, maybe won't fix
 
@@ -77,19 +83,3 @@ Here, user* is a userID from Firebase Authentication
         user7f8pR:
             0: Name: bob
             1: Choice: Refresh
-
-## TODO clean up from here down Copy-Paste:
-
-### P1
-- [ ] Anonymous login (hopefully persists on refresh, or cache token in local storage?)
-- [ ] Message flow
-- [ ] Database permission rules, with read permission on userMessage and write on serverMessage
-- [ ] Unit testing different database restart scenarios
-- [ ] App server has admin write permission, with deployment secret
-- [ ] Investigate moving hosting to Google node server, fix TODO in main README
-- [ ] When to delete data?
-
-### P2 
-- [ ] firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
-- [ ] OAuth/email sign-in, so users can roam between machines
-- [ ] Move hosting to Google node server if possible

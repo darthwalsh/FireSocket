@@ -114,12 +114,12 @@ describe("readyState", () => {
     });
     expect(afterOpen).toBe(FireSocket.OPEN);
 
-    // TODO test close
+    // TODO(close) test close
 
     done();
   });
 });
 
-// TODO the client open event should only fire when the server is connected
+// TODO(open) the client open event should only fire when the server is connected
 
-// TODO test that close stops the db listening events? https://firebase.google.com/docs/database/web/read-and-write#detach_listeners
+// TODO(close) test that close stops the db listening events? https://firebase.google.com/docs/database/web/read-and-write#detach_listeners
