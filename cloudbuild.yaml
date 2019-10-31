@@ -1,6 +1,6 @@
 steps:
-- name: 'gcr.io/cloud-builders/npm'
+- name: 'gcr.io/$PROJECT_ID/npm-with-java8'
   args: ['install']
-- name: 'gcr.io/cloud-builders/npm'
+- name: 'gcr.io/$PROJECT_ID/npm-with-java8'
   args: ['test']
   
