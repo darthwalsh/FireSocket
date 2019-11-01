@@ -5,6 +5,7 @@ A drop-in replacement for WebSocket using [Firebase Realtime Database](https://f
 ## Example
 
 TODO(example) example snippet
+
 TODO(example) example code showing where to plugin public/secret firebase config
 
 ## Installation
@@ -30,6 +31,8 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - Maybe use https://www.npmjs.com/package/tsd-jsdoc
   - Or use 3.7 beta of tsc? https://dev.to/open-wc/generating-typescript-definition-files-from-javascript-5bp2
 - set up CI/CD that builds/tests/publishes to npm
+    - ~~running tests in Cloud Build~~
+    - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
     - https://medium.com/@Philmod/npm-release-automation-adb970e49066
 - [ ] firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
 - Any TODOs left in README
