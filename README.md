@@ -19,7 +19,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - ~~readyState~~
   - open waits until server connects
   - close
-- A/B testing source compatibility between FireSocket and WebSocket
+- ~~A/B testing source compatibility between FireSocket and WebSocket~~
 - Database read/write limitations on user/server
 - Server admin authentication, supporting example server app and cli
 - Server lib for wiping some/all message state
@@ -33,6 +33,8 @@ TODO(example) example code showing where to plugin public/secret firebase config
 - set up CI/CD that builds/tests/publishes to npm
     - ~~running tests in Cloud Build~~
     - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
+    - MAYBE Github status checks on build success
+    - bot to update dependencies
     - https://medium.com/@Philmod/npm-release-automation-adb970e49066
 - [ ] firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
 - Any TODOs left in README

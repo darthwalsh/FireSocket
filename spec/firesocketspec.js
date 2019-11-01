@@ -16,7 +16,7 @@ describe("exiting message", () => {
 
     const server = new Server(firebase);
     const data = await new Promise((res, rej) => {
-      server.addEventListener("connection", socket => {
+      server.on("connection", socket => {
         socket.addEventListener("message", o => res(o.data));
       });
     });
@@ -48,7 +48,7 @@ describe("sending", () => {
     const server = new Server(firebase);
     const client = new FireSocket("user1", firebase);
     await new Promise((res, _) => {
-      server.addEventListener("connection", socket =>
+      server.on("connection", socket =>
         socket.addEventListener("message", o => {
           data.push(o.data);
           if (data.length === 3) {
@@ -70,7 +70,7 @@ describe("sending", () => {
 
     const data = [];
     const server = new Server(firebase);
-    server.addEventListener("connection", socket => {
+    server.on("connection", socket => {
       socket.send("a");
       socket.send("b");
       socket.send("c");

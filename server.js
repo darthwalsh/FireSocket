@@ -26,7 +26,7 @@ class Server {
   * @param {'connection'} event
   * @param {(socket: Socket) => void} cb
   */
-  addEventListener(event, cb) {
+  on(event, cb) {
     const arr = this.callbacks.get(event);
     if (!arr) {
       throw new Error(`Unsupported event type ${event}`);

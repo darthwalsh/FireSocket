@@ -2,6 +2,7 @@
 /** @typedef {import("firebase")} firebase */
 
 const Socket = require("./socket");
+const Server = require("./server");
 
 class FireSocket {
   /**
@@ -73,6 +74,8 @@ FireSocket.CONNECTING = 0;
 FireSocket.OPEN = 1;
 FireSocket.CLOSING = 2;
 FireSocket.CLOSED = 3;
+
+FireSocket.Server = Server;
 
 module.exports = FireSocket;
 
