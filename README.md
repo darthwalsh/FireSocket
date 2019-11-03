@@ -12,7 +12,15 @@ TODO(example) example code showing where to plugin public/secret firebase config
 
 `npm install` TODO(npm)
 
-### Roadmap to release 1.0
+### Firebase setup
+
+- Create [Firebase](https://console.firebase.google.com/) project
+- Set up [Database](https://console.firebase.google.com/u/0/project/firesocket-test/database) in locked mode
+- Set up [Authentication](https://console.firebase.google.com/u/0/project/firesocket-test/authentication/users)
+  - Enable Anonymous, and/or another provider to allow for resumption of socket connection
+- TODO setting up admin and client JSON
+
+## Roadmap to release 1.0
 - Basic parity with ws functionality
   - ~~message~~
   - ~~send~~
@@ -20,8 +28,8 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - open waits until server connects
   - close
 - ~~A/B testing source compatibility between FireSocket and WebSocket~~
-- Database read/write limitations on user/server
 - Server admin authentication, supporting example server app and cli
+- Database read/write limitations on user/server
 - Server lib for wiping some/all message state
 - Client authentication
   - ? pluggable, so can swap to email/OAuth sign-in?
@@ -32,6 +40,8 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - Or use 3.7 beta of tsc? https://dev.to/open-wc/generating-typescript-definition-files-from-javascript-5bp2
 - set up CI/CD that builds/tests/publishes to npm
     - ~~running tests in Cloud Build~~
+    - Set up using separate project
+    - Link from here to README in spec doc
     - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
     - MAYBE Github status checks on build success
     - bot to update dependencies
