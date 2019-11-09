@@ -1,7 +1,9 @@
 {
   "name": "example",
   "version": "1.0.0",
-  "scripts": {},
+  "scripts": {
+    "cli": "node cli.js"
+  },
   "dependencies": {
     "express": "^4.17.1"
   }

@@ -1,3 +1,5 @@
+// Run with `npm start ws`
+
 const express = require("express");
 const ws = require("ws");
 const app = express();
