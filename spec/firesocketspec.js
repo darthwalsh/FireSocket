@@ -14,7 +14,7 @@ describe("exiting message", () => {
   it("on server", async done => {
     await database.ref().set({user: {user1: {0: "message1"}}});
 
-    const server = new Server(firebase);
+    const server = new Server(database);
     const data = await new Promise((res, rej) => {
       server.on("connection", socket => {
         socket.addEventListener("message", o => res(o.data));
@@ -45,7 +45,7 @@ describe("sending", () => {
     await database.ref().set(null);
 
     const data = [];
-    const server = new Server(firebase);
+    const server = new Server(database);
     const client = new FireSocket("user1", firebase);
     await new Promise((res, _) => {
       server.on("connection", socket =>
@@ -69,7 +69,7 @@ describe("sending", () => {
     await database.ref().set(null);
 
     const data = [];
-    const server = new Server(firebase);
+    const server = new Server(database);
     server.on("connection", socket => {
       socket.send("a");
       socket.send("b");
@@ -105,7 +105,7 @@ describe("readyState", () => {
     const client = new FireSocket("user1", firebase);
     expect(client.readyState).toBe(FireSocket.CONNECTING);
 
-    new Server(firebase);
+    new Server(database);
 
     const afterOpen = await new Promise((res, _) => {
       client.addEventListener("open", () => {

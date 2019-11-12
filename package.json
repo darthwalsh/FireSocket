@@ -35,6 +35,6 @@
     "ws": "^7.1.2"
   },
   "dependencies": {
-    "firebase": "^6.6.0"
+    "firebase-admin": "^8.7.0"
   }
 }

@@ -18,7 +18,15 @@ TODO(example) example code showing where to plugin public/secret firebase config
 - Set up [Database](https://console.firebase.google.com/u/0/project/firesocket-test/database) in locked mode
 - Set up [Authentication](https://console.firebase.google.com/u/0/project/firesocket-test/authentication/users)
   - Enable Anonymous, and/or another provider to allow for resumption of socket connection
+- Set up [Admin Authentication](https://firebase.google.com/docs/database/admin/start#admin-sdk-authentication)
+  - Open [Service accounts](https://console.developers.google.com/iam-admin/serviceaccounts)
+  - Suggested name "server"
+  - Give permission "Firebase Realtime Database Admin"
+  - Create a JSON key and [store it securely](https://cloud.google.com/iam/docs/understanding-service-accounts#managing_service_account_keys)
 - TODO setting up admin and client JSON
+  - https://support.google.com/firebase/answer/7015592
+- TODO setting up database security rules
+- TODO links have firesocket-test?
 
 ## Roadmap to release 1.0
 - Basic parity with ws functionality

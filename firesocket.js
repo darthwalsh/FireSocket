@@ -7,7 +7,7 @@ const Server = require("./server");
 class FireSocket {
   /**
    * @param {string} auth // TODO(auth) should use real firebase auth
-   * @param {firebase} firebase
+   * @param {firebase} firebase // TODO should be hidden in client lib?
    */
   constructor(auth, firebase) {
     this.auth = auth;
