@@ -49,7 +49,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
 - set up CI/CD that builds/tests/publishes to npm
     - ~~running tests in Cloud Build~~
     - Set up using separate project
-    - Link from here to README in spec doc
+    - ~~Link from here to README in spec doc~~
     - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
     - MAYBE Github status checks on build success
     - bot to update dependencies
@@ -57,6 +57,12 @@ TODO(example) example code showing where to plugin public/secret firebase config
 - [ ] firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
 - Any TODOs left in README
 - Any TODOs left in code, maybe won't fix
+
+## Testing
+
+Like normal, run `npm test` to run all tests. This includes unit tests, and mock tests using the firebase emulator and a local WebSocket server. See [spec/](spec/README.md) for more information.
+
+The [example/](example/) can be useful for manually debugging changes.
 
 ## Motivation for client-server communication
 
