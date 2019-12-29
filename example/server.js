@@ -15,7 +15,7 @@ case "ws":
   break;
 case "fs":
   const firesocket = require("../firesocket");
-  const creds = require("./test-creds.json");
+  const creds = require("./.test-creds.json");
   wss = firesocket.Server.createFromCreds(
     creds,
     "https://firesocket-test.firebaseio.com",

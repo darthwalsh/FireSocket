@@ -21,6 +21,11 @@
     "url": "https://github.com/darthwalsh/FireSocket/issues"
   },
   "homepage": "https://github.com/darthwalsh/FireSocket#readme",
+  "files": [
+    "firesocket.js",
+    "server.js",
+    "socket.js"
+  ],
   "devDependencies": {
     "@firebase/testing": "^0.13.0",
     "@types/jasmine": "^3.4.0",
