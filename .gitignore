@@ -2,3 +2,4 @@ node_modules/
 junitresults-*.xml
 *-debug.log
 example/.test-creds.json
+build-browser.js

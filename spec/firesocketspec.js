@@ -1,7 +1,7 @@
 /* global describe it expect */
 
 const Server = require("../server");
-const FireSocket = require("../firesocket");
+const FireSocket = require("../firesocket-server");
 
 const testing = require("@firebase/testing");
 const firebase = testing.initializeTestApp({

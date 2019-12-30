@@ -2,7 +2,6 @@
 /** @typedef {import("firebase")} firebase */
 
 const Socket = require("./socket");
-const Server = require("./server");
 
 class FireSocket {
   /**
@@ -42,10 +41,10 @@ class FireSocket {
   /**
     * @param {'open'} event
     * @param {() => void} cb
-    *//**
+    *
     * @param {'close'} event //TODO(close) actually fire the close event and set the readyState
     * @param {() => void} cb
-    *//**
+    *
     * @param {'message'} event
     * @param {({data: any}) => void} cb
     */
@@ -75,7 +74,4 @@ FireSocket.OPEN = 1;
 FireSocket.CLOSING = 2;
 FireSocket.CLOSED = 3;
 
-FireSocket.Server = Server;
-
 module.exports = FireSocket;
-

@@ -7,7 +7,7 @@ const firebase = testing.initializeTestApp({
 });
 const database = firebase.database();
 
-describe("firesocket works", () => testSocket(require("../firesocket"), ["user1", firebase], [firebase.database()]));
+describe("firesocket works", () => testSocket(require("../firesocket-server"), ["user1", firebase], [firebase.database()]));
 describe("ws baseline", () => testSocket(require("ws"), ["ws://localhost:8082"], [{port: 8082}]));
 
 function testSocket(Socket, clientArgs, serverArgs) {
