@@ -1,4 +1,5 @@
 // Run with `npm run cli http://localhost:8080 name` or `npm run fs name`
+// @ts-nocheck
 
 const readline = require("readline");
 const WebSocket = require("ws"); // TODO conditional
@@ -11,7 +12,6 @@ if (!url || !name) {
 
 const rl = readline.createInterface(process.stdin, process.stdout);
 
-/** @type WebSocket */
 let ws;
 if (url !== "fs") {
   const wsUrl = url.replace(/^http/, "ws");

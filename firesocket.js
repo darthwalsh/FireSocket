@@ -6,7 +6,7 @@ const Socket = require("./socket");
 class FireSocket {
   /**
    * @param {string} auth // TODO(auth) should use real firebase auth
-   * @param {firebase} firebase // TODO should be hidden in client lib?
+   * @param {firebase} firebase
    */
   constructor(auth, firebase) {
     this.auth = auth;
@@ -17,7 +17,8 @@ class FireSocket {
     this.readyState = FireSocket.CONNECTING;
     const write = this.database.ref(`user/${this.auth}`);
     write.update({"__CONNECTION": true}, () => this.onOpen());
-    this.socket = new Socket(this.database.ref(`server/${this.auth}`), write);
+    const read = this.database.ref(`server/${this.auth}`);
+    this.socket = new Socket(/** @type {any} */(read), /** @type {any} */(write));
   }
 
   onOpen() {
@@ -39,21 +40,21 @@ class FireSocket {
   }
 
   /**
-    * @param {'open'} event
-    * @param {() => void} cb
-    *
-    * @param {'close'} event //TODO(close) actually fire the close event and set the readyState
-    * @param {() => void} cb
-    *
-    * @param {'message'} event
-    * @param {({data: any}) => void} cb
+   * @callback onEvent
+   * @param {{ data?: any }} cb
+   */
+
+  /**
+    * @param {'open' | 'close' | 'message'} event
+    * @param {onEvent} cb
     */
   addEventListener(event, cb) {
+    // TODO(close) actually fire the close event and set the readyState
     const arr = this.callbacks.get(event);
     if (arr) {
       arr.push(cb);
     } else {
-      this.socket.addEventListener(event, cb);
+      this.socket.addEventListener(/** @type {any} **/(event), cb);
     }
   }
 

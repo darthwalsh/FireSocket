@@ -6,13 +6,15 @@ const Socket = require("./socket");
 
 class Server {
   /**
-   * @param {firebase.database} database
+   * @param {firebase.database.Database} database
    */
   constructor(database) {
     this.database = database;
     this.clients = /** @type {Socket[]} */ ([]);
     this.callbacks = new Map([
-      ["connection", [socket => this.clients.push(socket)]],
+      ["connection", [socket => {
+        this.clients.push(socket);
+      }]],
     ]);
     setTimeout(() => this.database.ref("user").on("child_added", ss => this.onConnection(ss)));
   }
@@ -52,7 +54,7 @@ class Server {
  */
 function createFromCreds(json, databaseUrl, options) {
   if (options.app) {
-    options.app.use("/firesocket.js", (_, res) => res.sendFile("build-browser.js", { root: __dirname }));
+    options.app.use("/firesocket.js", (_, res) => res.sendFile("build-browser.js", {root: __dirname}));
     options.app.use("/firebase-config.json", (_, res) => res.json(options.config));
   }
 
@@ -62,8 +64,7 @@ function createFromCreds(json, databaseUrl, options) {
     databaseURL: databaseUrl,
     ...(options.uid && {databaseAuthVariableOverride: {uid: options.uid}}),
   });
-  const database = admin.database();
-  return new Server(database);
+  return new Server(/** @type {any} */(admin.database()));
 }
 Server.createFromCreds = createFromCreds;
 

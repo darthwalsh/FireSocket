@@ -4,7 +4,8 @@
   "description": "A drop-in replacement for WebSocket using Firebase Realtime Database",
   "main": "firesocket-server.js",
   "scripts": {
-    "build": "browserify firesocket-browser.js -o build-browser.js",
+    "prepublish": "typings install",
+    "build": "npx browserify firesocket-browser.js -o build-browser.js",
     "pretest": "eslint --fix *.js spec && tsc -p jsconfig.json",
     "test": "firebase emulators:exec --only database \"jasmine\"",
     "local": "firebase emulators:start --only database"
@@ -30,17 +31,18 @@
     "socket.js"
   ],
   "devDependencies": {
-    "@firebase/testing": "^0.13.0",
+    "@firebase/testing": "^0.13.4",
+    "@types/express": "^4.17.2",
     "@types/jasmine": "^3.4.0",
     "@types/node": "^12.7.4",
     "@types/ws": "^6.0.3",
-    "browserify": "^16.5.0",
     "eslint": "^6.3.0",
     "eslint-config-google": "^0.14.0",
-    "firebase-tools": "^7.3.1",
+    "firebase-tools": "^7.11.0",
     "jasmine": "^3.4.0",
     "jasmine-reporters": "^2.3.2",
-    "typescript": "^3.6.2",
+    "typescript": "^3.7.4",
+    "typings": "^2.1.1",
     "ws": "^7.1.2"
   },
   "dependencies": {

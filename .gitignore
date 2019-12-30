@@ -1,4 +1,5 @@
 node_modules/ 
+typings/ 
 junitresults-*.xml
 *-debug.log
 example/.test-creds.json

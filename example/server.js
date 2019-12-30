@@ -1,4 +1,5 @@
 // Run with `npm start ws` or `npm start fs`
+// @ts-nocheck
 
 const express = require("express");
 const app = express();

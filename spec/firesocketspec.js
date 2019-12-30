@@ -1,20 +1,23 @@
 /* global describe it expect */
+/** @typedef {import("firebase")} Firebase */
 
 const Server = require("../server");
 const FireSocket = require("../firesocket-server");
 
 const testing = require("@firebase/testing");
-const firebase = testing.initializeTestApp({
+const firebase = /** @type {Firebase} */(/** @type {unknown} */(testing.initializeTestApp({
   databaseName: "testDb",
   auth: {uid: "alice"},
-});
+})));
 const database = firebase.database();
 
 describe("exiting message", () => {
   it("on server", async done => {
     await database.ref().set({user: {user1: {0: "message1"}}});
 
+    // @ts-ignore
     const server = new Server(database);
+    // @ts-ignore
     const data = await new Promise((res, rej) => {
       server.on("connection", socket => {
         socket.addEventListener("message", o => res(o.data));
@@ -30,6 +33,7 @@ describe("exiting message", () => {
     await database.ref().set({server: {user1: {0: "message1"}}});
 
     const client = new FireSocket("user1", firebase);
+    // @ts-ignore
     const data = await new Promise((res, rej) => {
       client.addEventListener("message", o => res(o.data));
     });
@@ -45,6 +49,7 @@ describe("sending", () => {
     await database.ref().set(null);
 
     const data = [];
+    // @ts-ignore
     const server = new Server(database);
     const client = new FireSocket("user1", firebase);
     await new Promise((res, _) => {
@@ -69,6 +74,7 @@ describe("sending", () => {
     await database.ref().set(null);
 
     const data = [];
+    // @ts-ignore
     const server = new Server(database);
     server.on("connection", socket => {
       socket.send("a");
@@ -105,6 +111,7 @@ describe("readyState", () => {
     const client = new FireSocket("user1", firebase);
     expect(client.readyState).toBe(FireSocket.CONNECTING);
 
+    // @ts-ignore
     new Server(database);
 
     const afterOpen = await new Promise((res, _) => {
