@@ -4,13 +4,13 @@ A drop-in replacement for WebSocket using [Firebase Realtime Database](https://f
 
 ## Example
 
+A full example showing dynamically switching between FireSocket and WebSocket is in [example/](example/).
+
+### Code changes
+
 TODO(example) example snippet
 
 TODO(example) example code showing where to plugin public/secret firebase config
-
-## Installation
-
-`npm install` TODO(npm)
 
 ### Firebase setup
 
@@ -18,15 +18,27 @@ TODO(example) example code showing where to plugin public/secret firebase config
 - Set up [Database](https://console.firebase.google.com/u/0/project/firesocket-test/database) in locked mode
 - Set up [Authentication](https://console.firebase.google.com/u/0/project/firesocket-test/authentication/users)
   - Enable Anonymous, and/or another provider to allow for resumption of socket connection
-- Set up [Admin Authentication](https://firebase.google.com/docs/database/admin/start#admin-sdk-authentication)
-  - Open [Service accounts](https://console.developers.google.com/iam-admin/serviceaccounts)
+- Set up [Admin Authentication](https://firebase.google.com/docs/database/admin/start#admin-sdk-authentication) using a [Service Account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#overview)
+  - Open [IAM Service accounts](https://console.developers.google.com/iam-admin/serviceaccounts)
   - Suggested name "server"
   - Give permission "Firebase Realtime Database Admin"
-  - Create a JSON key and [store it securely](https://cloud.google.com/iam/docs/understanding-service-accounts#managing_service_account_keys)
-- TODO setting up admin and client JSON
-  - https://support.google.com/firebase/answer/7015592
+  - TODO can use application default credentials?
+  - (MAYBE only for local testing) Create a JSON key and [store it securely](https://cloud.google.com/iam/docs/understanding-service-accounts#managing_service_account_keys)
 - TODO setting up database security rules
 - TODO links have firesocket-test?
+
+### App setup
+
+- On the web server, change `WebSocket` to `FireSocket`
+  - `require("firesocket")`
+  - (TODO split up browser part) If clients are browser-based, use `firesocket.Server.createFromCreds` factory to create Server.
+  - The returned `FireSocket.Server` object is compatible with `WebSocket.Server`
+- Download the client public config for web app
+  - https://support.google.com/firebase/answer/7015592
+  - The web server is expected to serve this JSON at `/firebase-config.json`
+- Add the `firesocket.js` script before your web app's logic
+  - Replace `WebSocket` with `FireSocket` (the constructor args are ignored)
+  - The `FireSocket` object is compatible with `WebSocket`
 
 ## Roadmap to release 1.0
 - Basic parity with ws functionality
@@ -41,20 +53,20 @@ TODO(example) example code showing where to plugin public/secret firebase config
 - Server lib for wiping some/all message state
 - Client authentication
   - ? pluggable, so can swap to email/OAuth sign-in?
-- Example express server setup with HTTP serving the script file
-- npm limit files for pack release
+- ~~Example express server setup with HTTP serving the script file~~
+- ~~npm limit files for pack release~~
 - generate .d.ts prepack or something
   - Maybe use https://www.npmjs.com/package/tsd-jsdoc
   - Or use 3.7 beta of tsc? https://dev.to/open-wc/generating-typescript-definition-files-from-javascript-5bp2
 - set up CI/CD that builds/tests/publishes to npm
-    - ~~running tests in Cloud Build~~
-    - Set up using separate project
-    - ~~Link from here to README in spec doc~~
-    - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
-    - MAYBE Github status checks on build success
-    - bot to update dependencies
-    - https://medium.com/@Philmod/npm-release-automation-adb970e49066
+  - ~~running tests in Cloud Build~~
+  - Set up using separate project
+  - ~~Link from here to README in spec doc~~
+  - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
+  - MAYBE Github status checks on build success
+  - https://medium.com/@Philmod/npm-release-automation-adb970e49066
 - [ ] firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
+- bot to update dependencies
 - Any TODOs left in README
 - Any TODOs left in code, maybe won't fix
 
@@ -66,7 +78,7 @@ The [example/](example/) can be useful for manually debugging changes.
 
 ## Motivation for client-server communication
 
-### Websocket
+### WebSocket
 The default client-server communication, and by far the fastest. It's pretty simple for a [web game](https://github.com/darthwalsh/Austerity/blob/3bd2cfb825eaf8d537945c02da5b96bfe38ddca7/server/connection.js) to just update state and issue questions based on player events.
 
 Downsides:
@@ -76,7 +88,7 @@ Downsides:
 
 ### Firebase Database
 
-Using [Firebase Realtime Database](https://firebase.google.com/docs/database), it is possible to emulate websocket messages. 
+Using [Firebase Realtime Database](https://firebase.google.com/docs/database), it is possible to emulate WebSocket messages. 
 
 This fixes both limitations:
 

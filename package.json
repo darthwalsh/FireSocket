@@ -14,7 +14,9 @@
     "url": "git+https://github.com/darthwalsh/FireSocket.git"
   },
   "keywords": [
-    "websocket", "firebase", "real-time"
+    "websocket",
+    "firebase",
+    "real-time"
   ],
   "author": "Carl Walsh",
   "license": "MIT",

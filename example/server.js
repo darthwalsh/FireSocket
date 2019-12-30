@@ -15,6 +15,7 @@ switch (process.argv[2]) {
     break;
   case "fs":
     const firesocket = require("../firesocket-server");
+    // gcloud iam service-accounts keys create .test-creds.json --iam-account server@firesocket-test.iam.gserviceaccount.com
     const creds = require("./.test-creds.json");
     const config = {
       projectId: "firesocket-test",
