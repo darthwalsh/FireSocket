@@ -5,19 +5,18 @@ const Socket = require("./socket");
 
 class FireSocket {
   /**
-   * @param {string} auth // TODO(auth) should use real firebase auth
+   * @param {string} uid
    * @param {firebase} firebase
    */
-  constructor(auth, firebase) {
-    this.auth = auth;
+  constructor(uid, firebase) {
     this.database = firebase.database();
     this.callbacks = new Map([ // events not in common with socket
       ["open", []],
     ]);
     this.readyState = FireSocket.CONNECTING;
-    const write = this.database.ref(`user/${this.auth}`);
+    const write = this.database.ref(`user/${uid}`);
     write.update({"__CONNECTION": true}, () => this.onOpen());
-    const read = this.database.ref(`server/${this.auth}`);
+    const read = this.database.ref(`server/${uid}`);
     this.socket = new Socket(/** @type {any} */(read), /** @type {any} */(write));
   }
 

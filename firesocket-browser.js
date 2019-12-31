@@ -9,16 +9,17 @@ class FireSocket {
   constructor() {
     this.fireSocket = /** @type {FireSocketCommon} */ (null);
 
-    this.fireLoaded = Promise.all([this.loadConfig(), ...["app", "auth", "database"].map(this.loadFire)])
-      .then(([config]) => {
+    this.fireLoaded = Promise.all([this.loadConfig(), ...["app", "auth", "database"].map(c => this.loadFire(c))])
+      .then(async ([config]) => {
         this.getGlobalFireBase().initializeApp(config);
-        this.fireSocket = new FireSocketCommon("web" + Math.random().toString(36).substring(7), this.getGlobalFireBase()); // TODO(auth) should plug in here
+        const uid = await this.signInUser(this.getGlobalFireBase());
+        this.fireSocket = new FireSocketCommon(uid, this.getGlobalFireBase());
       });
   }
 
   loadFire(component) {
     const id = "firebase-loadFire-" + component;
-    if (typeof this.getGlobalFireBase() !== "undefined" || document.getElementById(id)) {
+    if (this.getGlobalFireBase() || document.getElementById(id)) {
       return;
     }
 
@@ -38,13 +39,23 @@ class FireSocket {
   * @returns {firebase}
   */
   getGlobalFireBase() {
-    // @ts-ignore
-    return firebase;
+    // @ts-ignore global loaded by the html scripts
+    return typeof firebase !== "undefined" && firebase;
   }
 
   async loadConfig() {
     const response = await fetch("/firebase-config.json");
     return response.json();
+  }
+
+  /**
+   * @param {firebase} [firebase]
+   * @returns {Promise<string>} uid
+   */
+  async signInUser(firebase) {
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE); // MAYBE this could be extended to session, but client would need API to restart connection
+    const cred = await firebase.auth().signInAnonymously();
+    return cred.user.uid;
   }
 }
 

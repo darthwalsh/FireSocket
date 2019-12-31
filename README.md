@@ -16,7 +16,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
 
 - Create [Firebase](https://console.firebase.google.com/) project
 - Set up [Database](https://console.firebase.google.com/u/0/project/firesocket-test/database) in locked mode
-- Set up [Authentication](https://console.firebase.google.com/u/0/project/firesocket-test/authentication/users)
+- Set up [Authentication](https://console.firebase.google.com/u/0/project/firesocket-test/authentication)
   - Enable Anonymous, and/or another provider to allow for resumption of socket connection
 - Set up [Admin Authentication](https://firebase.google.com/docs/database/admin/start#admin-sdk-authentication) using a [Service Account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#overview)
   - Open [IAM Service accounts](https://console.developers.google.com/iam-admin/serviceaccounts)
@@ -48,11 +48,12 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - open waits until server connects
   - close
 - ~~A/B testing source compatibility between FireSocket and WebSocket~~
-- Server admin authentication, supporting example server app and cli
+- ~~Server admin authentication, supporting example server app and cli~~
 - Database read/write limitations on user/server
 - Server lib for wiping some/all message state
 - Client authentication
-  - ? pluggable, so can swap to email/OAuth sign-in?
+  - ~~web~~
+  - cli
 - ~~Example express server setup with HTTP serving the script file~~
 - ~~npm limit files for pack release~~
 - generate .d.ts prepack or something
@@ -69,6 +70,10 @@ TODO(example) example code showing where to plugin public/secret firebase config
 - bot to update dependencies
 - Any TODOs left in README
 - Any TODOs left in code, maybe won't fix
+
+## Future improvements
+
+- [ ] Authentication is pluggable, so app can swap in email/SMS/OAuth sign-in
 
 ## Testing
 

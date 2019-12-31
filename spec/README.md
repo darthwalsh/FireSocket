@@ -1,5 +1,9 @@
 # Testing
 
+To run individual tests, run `npm run local` to start the firebase emulator. Otherise, `npm test` will start the emulator then run the tests.
+
+While tests are running, http://localhost:9000/.json?ns=testDb will show the state of the local database.
+
 ## Dependencies
 
 Other than npm dependencies, the local version of firebase installed with `@firebase/testing` also requires that java is installed locally.
