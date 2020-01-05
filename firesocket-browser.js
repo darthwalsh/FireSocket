@@ -53,7 +53,9 @@ class FireSocket {
    * @returns {Promise<string>} uid
    */
   async signInUser(firebase) {
+    // @ts-ignore
     await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE); // MAYBE this could be extended to session, but client would need API to restart connection
+    // @ts-ignore
     const cred = await firebase.auth().signInAnonymously();
     return cred.user.uid;
   }

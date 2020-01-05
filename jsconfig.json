@@ -12,6 +12,9 @@
     //   "noImplicitReturns": true,
     //   "strict": true,
     //   "noUnusedLocals": true,
-    }
+    },
 
+    "exclude": [
+      "build-browser.js"
+    ]
 }

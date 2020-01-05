@@ -31,10 +31,10 @@
     "socket.js"
   ],
   "devDependencies": {
-    "@firebase/testing": "^0.13.4",
+    "@firebase/testing": "^0.16.4",
     "@types/express": "^4.17.2",
     "@types/jasmine": "^3.4.0",
-    "@types/node": "^12.7.4",
+    "@types/node": "^12.12.24",
     "@types/ws": "^6.0.3",
     "eslint": "^6.3.0",
     "eslint-config-google": "^0.14.0",
@@ -46,6 +46,6 @@
     "ws": "^7.1.2"
   },
   "dependencies": {
-    "firebase-admin": "^8.7.0"
+    "firebase-admin": "^8.9.0"
   }
 }
