@@ -24,7 +24,11 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - Give permission "Firebase Realtime Database Admin"
   - TODO can use application default credentials?
   - (MAYBE only for local testing) Create a JSON key and [store it securely](https://cloud.google.com/iam/docs/understanding-service-accounts#managing_service_account_keys)
-- TODO setting up database security rules
+- Set up database security rules
+  - Run `firebase login` then `firebase init` 
+  - In `firebase.json` change `database.rules` path to `node_modules/firesocket/database.rules.json`
+  - TODO verify this works
+  - Run `firebase deploy --only database`
 - TODO links have firesocket-test?
 
 ### App setup
@@ -49,7 +53,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - close
 - ~~A/B testing source compatibility between FireSocket and WebSocket~~
 - ~~Server admin authentication, supporting example server app and cli~~
-- Database read/write limitations on user/server
+- ~~Database read/write limitations on user/server~~
 - Server lib for wiping some/all message state
 - Client authentication
   - ~~web~~

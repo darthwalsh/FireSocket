@@ -47,7 +47,6 @@ class Server {
  * @param {string} json JSON string with service account credentials
  * @param {string} databaseUrl e.g. "https://databaseName.firebaseio.com"
  * @param {object} options
- * @param {string} [options.uid] custom auth for limited privileges
  * @param {Express} [options.app] Express app to serve firesocket client lib
  * @param {object} [options.config] Firebase client config
  * @returns Server
@@ -62,7 +61,6 @@ function createFromCreds(json, databaseUrl, options) {
   admin.initializeApp({
     credential: admin.credential.cert(json),
     databaseURL: databaseUrl,
-    ...(options.uid && {databaseAuthVariableOverride: {uid: options.uid}}),
   });
   return new Server(/** @type {any} */(admin.database()));
 }

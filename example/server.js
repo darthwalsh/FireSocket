@@ -27,7 +27,7 @@ switch (process.argv[2]) {
     wss = firesocket.Server.createFromCreds(
       creds,
       "https://firesocket-test.firebaseio.com",
-      {uid: "server", app, config},
+      {app, config},
     );
     break;
   case undefined:
