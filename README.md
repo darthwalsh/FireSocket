@@ -55,9 +55,9 @@ TODO(example) example code showing where to plugin public/secret firebase config
 - ~~Server admin authentication, supporting example server app and cli~~
 - ~~Database read/write limitations on user/server~~
 - Server lib for wiping some/all message state
-- Client authentication
+- ~~Client authentication~~
   - ~~web~~
-  - cli
+  - ~~cli~~
 - ~~Example express server setup with HTTP serving the script file~~
 - ~~npm limit files for pack release~~
 - generate .d.ts prepack or something
