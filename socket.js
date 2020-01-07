@@ -7,6 +7,7 @@ class Socket {
    * @param {firebase.database.Reference} write
    */
   constructor(read, write) {
+    this.read = read;
     this.write = write;
     this.callbacks = new Map([["message", []]]);
     setTimeout(() => read.on("child_added", ss => this.onMessage(ss)));
@@ -37,6 +38,10 @@ class Socket {
       throw new Error(`Unsupported event type ${event}`);
     }
     arr.push(cb);
+  }
+
+  close() {
+    this.read.off("child_added");
   }
 }
 

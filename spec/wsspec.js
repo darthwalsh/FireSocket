@@ -35,7 +35,7 @@ function testSocket(Socket, clientArgs, serverArgs) {
 
     expect(data).toEqual(["a", "b", "c"]);
 
-    server.close && server.close(done) || done();
+    server.close(done);
   });
 
   it("server to client", async done => {
@@ -62,7 +62,7 @@ function testSocket(Socket, clientArgs, serverArgs) {
 
     expect(data).toEqual(["a", "b", "c"]);
 
-    server.close && server.close(done) || done();
+    server.close(done);
   });
 
   it("has readyState properties", () => {
@@ -85,6 +85,6 @@ function testSocket(Socket, clientArgs, serverArgs) {
     });
     expect(afterOpen).toBe(Socket.OPEN);
 
-    server.close && server.close(done) || done(); // TODO(close) fix all the close
+    server.close(done);
   });
 }

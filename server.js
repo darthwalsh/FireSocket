@@ -16,7 +16,8 @@ class Server {
         this.clients.push(socket);
       }]],
     ]);
-    setTimeout(() => this.database.ref("user").on("child_added", ss => this.onConnection(ss)));
+    this.userRef = this.database.ref("user");
+    setTimeout(() => this.userRef.on("child_added", ss => this.onConnection(ss)));
   }
 
   /**
@@ -38,6 +39,22 @@ class Server {
       throw new Error(`Unsupported event type ${event}`);
     }
     arr.push(cb);
+  }
+
+  /**
+   * @param {function} [cb]
+   */
+  close(cb) {
+    // MAYBE should forward Express requests to next middleware?
+    this.userRef.off("child_added");
+    for (const client of this.clients) {
+      client.close();
+    }
+    this.clients = [];
+
+    if (cb) {
+      setTimeout(cb);
+    }
   }
 }
 

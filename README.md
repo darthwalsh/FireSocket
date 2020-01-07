@@ -50,7 +50,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - ~~send~~
   - ~~readyState~~
   - open waits until server connects
-  - close
+  - ~~close~~
 - ~~A/B testing source compatibility between FireSocket and WebSocket~~
 - ~~Server admin authentication, supporting example server app and cli~~
 - ~~Database read/write limitations on user/server~~
@@ -60,18 +60,18 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - ~~cli~~
 - ~~Example express server setup with HTTP serving the script file~~
 - ~~npm limit files for pack release~~
+- bot to update dependencies
 - generate .d.ts prepack or something
   - Maybe use https://www.npmjs.com/package/tsd-jsdoc
   - Or use 3.7 beta of tsc? https://dev.to/open-wc/generating-typescript-definition-files-from-javascript-5bp2
 - set up CI/CD that builds/tests/publishes to npm
   - ~~running tests in Cloud Build~~
-  - Set up using separate project
+  - ~~Set up using separate project~~
   - ~~Link from here to README in spec doc~~
   - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
-  - MAYBE Github status checks on build success
+  - ~~Github status checks on build success~~
   - https://medium.com/@Philmod/npm-release-automation-adb970e49066
-- [ ] firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
-- bot to update dependencies
+- firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
 - Any TODOs left in README
 - Any TODOs left in code, maybe won't fix
 

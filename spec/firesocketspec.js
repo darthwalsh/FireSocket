@@ -26,7 +26,7 @@ describe("exiting message", () => {
 
     expect(data).toBe("message1");
 
-    done();
+    server.close(done);
   });
 
   it("on client", async done => {
@@ -67,7 +67,7 @@ describe("sending", () => {
 
     expect(data).toEqual(["a", "b", "c"]);
 
-    done();
+    server.close(done);
   });
 
   it("server to client", async done => {
@@ -95,7 +95,7 @@ describe("sending", () => {
 
     expect(data).toEqual(["a", "b", "c"]);
 
-    done();
+    server.close(done);
   });
 });
 
@@ -112,7 +112,7 @@ describe("readyState", () => {
     expect(client.readyState).toBe(FireSocket.CONNECTING);
 
     // @ts-ignore
-    new Server(database);
+    const server = new Server(database);
 
     const afterOpen = await new Promise((res, _) => {
       client.addEventListener("open", () => {
@@ -121,12 +121,10 @@ describe("readyState", () => {
     });
     expect(afterOpen).toBe(FireSocket.OPEN);
 
-    // TODO(close) test close
-
-    done();
+    server.close(done);
   });
 });
 
 // TODO(open) the client open event should only fire when the server is connected
 
-// TODO(close) test that close stops the db listening events? https://firebase.google.com/docs/database/web/read-and-write#detach_listeners
+// TODO(close) test that close stops the db and HTTP listening events
