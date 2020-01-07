@@ -2,7 +2,7 @@
   "name": "example",
   "version": "1.0.0",
   "scripts": {
-    "prepublish": "cp ../database.rules.json .",
+    "prepare": "cp ../database.rules.json .",
     "cli": "node cli.js"
   },
   "dependencies": {
