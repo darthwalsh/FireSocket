@@ -60,10 +60,8 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - ~~cli~~
 - ~~Example express server setup with HTTP serving the script file~~
 - ~~npm limit files for pack release~~
-- bot to update dependencies
-- generate .d.ts prepack or something
-  - Maybe use https://www.npmjs.com/package/tsd-jsdoc
-  - Or use 3.7 beta of tsc? https://dev.to/open-wc/generating-typescript-definition-files-from-javascript-5bp2
+- ~~bot to update dependencies~~
+- ~~generate .d.ts prepack or something~~
 - set up CI/CD that builds/tests/publishes to npm
   - ~~running tests in Cloud Build~~
   - ~~Set up using separate project~~
@@ -78,6 +76,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
 ## Future improvements
 
 - [ ] Authentication is pluggable, so app can swap in email/SMS/OAuth sign-in
+- [ ] [Generate type declarations](https://github.com/microsoft/TypeScript/pull/32372) instead of relying on cast to WebSocket 
 
 ## Testing
 
