@@ -31,19 +31,19 @@
     "socket.js"
   ],
   "devDependencies": {
-    "@firebase/testing": "^0.16.4",
-    "@types/express": "^4.17.2",
-    "@types/jasmine": "^3.4.0",
-    "@types/node": "^12.12.24",
-    "@types/ws": "^6.0.3",
-    "eslint": "^6.3.0",
-    "eslint-config-google": "^0.14.0",
-    "firebase-tools": "^7.11.0",
-    "jasmine": "^3.4.0",
-    "jasmine-reporters": "^2.3.2",
-    "typescript": "^3.7.4",
-    "typings": "^2.1.1",
-    "ws": "^7.1.2"
+    "@firebase/testing": "0.16.4",
+    "@types/express": "4.17.2",
+    "@types/jasmine": "3.5.0",
+    "@types/node": "12.12.24",
+    "@types/ws": "6.0.4",
+    "eslint": "6.8.0",
+    "eslint-config-google": "0.14.0",
+    "firebase-tools": "7.11.0",
+    "jasmine": "3.5.0",
+    "jasmine-reporters": "2.3.2",
+    "typescript": "3.7.4",
+    "typings": "2.1.1",
+    "ws": "7.2.1"
   },
   "dependencies": {
     "firebase-admin": "^8.9.0"
