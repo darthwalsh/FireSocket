@@ -110,7 +110,7 @@ Guide: [Info on Data Model, Auth, Queues](https://howtofirebase.com/firebase-dat
 
 #### Database Schema
 
-Each game is composed of messages from server to client, and v/v.
+Each game is composed of string or object messages from server to client, and v/v.
 
 Each firebase client listens for `child_added` on their message queue.
 
@@ -133,3 +133,6 @@ Here, user* is a userID from Firebase Authentication
         user7f8pR:
             0: Name: bob
             1: Choice: Refresh
+
+As an implementation detail, when first connecting, the client sends the current date with key __CONNECTION,
+and then the server sends the same date on its stream. This way the client can know an active server is listening.
