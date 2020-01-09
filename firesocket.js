@@ -15,9 +15,13 @@ class FireSocket {
     ]);
     this.readyState = FireSocket.CONNECTING;
     const write = this.database.ref(`user/${uid}`);
-    write.update({"__CONNECTION": true}, () => this.onOpen());
+    write.update({[Socket.__CONNECTION]: true}); //TODO(open), () => this.onOpen());
+    // @ts-ignore
+    write.onDisconnect().update({ [Socket.__CONNECTION]: firebase.database.ServerValue.TIMESTAMP });
     const read = this.database.ref(`server/${uid}`);
     this.socket = new Socket(/** @type {any} */(read), /** @type {any} */(write));
+    // const connected = ss => 
+    //   this.read.on(
   }
 
   onOpen() {
@@ -49,6 +53,10 @@ class FireSocket {
     */
   addEventListener(event, cb) {
     // TODO(close) actually fire the close event and set the readyState
+    if (event === 'message' && this.readyState !== FireSocket.OPEN) {
+      //throw "need to delay adding message events until after __CONNECTION!";
+    }
+
     const arr = this.callbacks.get(event);
     if (arr) {
       arr.push(cb);

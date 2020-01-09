@@ -5,6 +5,8 @@
 
 const FireSocketCommon = require("./firesocket");
 
+// TODO modularize this as an optional Promise<firebase> input to the FireSocket?
+// TODO combine Socket into this, with ctor allowing Server to set read/write
 class FireSocket {
   constructor() {
     this.fireSocket = /** @type {FireSocketCommon} */ (null);

@@ -16,7 +16,7 @@ class Socket {
    * @param {firebase.database.DataSnapshot} snapshot
    */
   onMessage(snapshot) {
-    if (snapshot.key === "__CONNECTION") { // if switch to metadata records, create {kind: connection, data: ...}?
+    if (snapshot.key === Socket.__CONNECTION) { // if switch to metadata records, create {kind: connection, data: ...}?
       return;
     }
     const data = snapshot.val();
@@ -28,6 +28,7 @@ class Socket {
   send(data) {
     this.write.push().set(data);
   }
+
   /**
     * @param {'message'} event
     * @param {({data: any}) => void} cb
@@ -40,9 +41,24 @@ class Socket {
     arr.push(cb);
   }
 
+  // TODO test this works
+  /**
+  * @param {'message'} event
+  * @param {({data: any}) => void} cb
+  */
+  removeEventListener(event, cb) {
+    const arr = this.callbacks.get(event);
+    if (!arr) {
+      throw new Error(`Unsupported event type ${event}`);
+    }
+    this.callbacks.set(event, arr.filter(f => f !== cb));
+  }
+
   close() {
     this.read.off("child_added");
   }
 }
+
+Socket.__CONNECTION = "__CONNECTION";
 
 module.exports = Socket;

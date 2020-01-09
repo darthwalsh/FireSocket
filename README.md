@@ -66,7 +66,6 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - ~~running tests in Cloud Build~~
   - ~~Set up using separate project~~
   - ~~Link from here to README in spec doc~~
-  - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
   - ~~Github status checks on build success~~
   - https://medium.com/@Philmod/npm-release-automation-adb970e49066
 - firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
@@ -77,6 +76,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
 
 - [ ] Authentication is pluggable, so app can swap in email/SMS/OAuth sign-in
 - [ ] [Generate type declarations](https://github.com/microsoft/TypeScript/pull/32372) instead of relying on cast to WebSocket 
+- [ ] CI [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/) using custom GCP functions
 
 ## Testing
 
@@ -110,7 +110,7 @@ Guide: [Info on Data Model, Auth, Queues](https://howtofirebase.com/firebase-dat
 
 #### Database Schema
 
-Each game is composed of messages from server to client, and v/v.
+Each game is composed of string or object messages from server to client, and v/v.
 
 Each firebase client listens for `child_added` on their message queue.
 
@@ -133,3 +133,6 @@ Here, user* is a userID from Firebase Authentication
         user7f8pR:
             0: Name: bob
             1: Choice: Refresh
+
+As an implementation detail, when first connecting, the client sends key __CONNECTION with value true, then overwrites with the date on breaking the connection,
+and then the server sends the same date on its stream. This way the client can know an active server is listening.

@@ -123,6 +123,30 @@ describe("readyState", () => {
 
     server.close(done);
   });
+
+  it("open waits", async done => {
+    await database.ref().set(null);
+
+    const client = new FireSocket("user1", firebase);
+
+    const opening = new Promise((res, _) => {
+      client.addEventListener("open", () => {
+        res(client.readyState);
+      });
+    });
+    const wait = ms => new Promise((res, _) => setTimeout(() => res(ms), ms)); // TODO replace all (res, _) with res
+    
+    const race = await Promise.race([opening, wait(100)]);
+    expect(race).toBe(100);
+
+    // @ts-ignore
+    const server = new Server(database);
+
+    const afterOpen = await opening;
+    expect(await opening).toBe(FireSocket.OPEN);
+
+    server.close(done);
+  });
 });
 
 // TODO(open) the client open event should only fire when the server is connected
