@@ -1,4 +1,4 @@
-/* global describe it expect */
+/* global describe it beforeEach expect */
 
 const testing = require("@firebase/testing");
 const firebase = testing.initializeTestApp({
@@ -7,16 +7,25 @@ const firebase = testing.initializeTestApp({
 });
 const database = firebase.database();
 
-describe("firesocket works", () => testSocket(require("../firesocket-server"), ["user1", firebase], [firebase.database()]));
-describe("ws baseline", () => testSocket(require("ws"), ["ws://localhost:8082"], [{port: 8082}]));
+describe("firesocket baseline",
+  () => testSocket(require("../firesocket-server"),
+    () => ["user1", firebase],
+    () => [database]));
+let port = 8082;
+describe("ws baseline",
+  () => testSocket(require("ws"),
+    () => ["ws://localhost:" + port],
+    () => [{port}]));
 
 function testSocket(Socket, clientArgs, serverArgs) {
+  beforeEach(() => ++port);
+
   it("client to server", async done => {
     await database.ref().set(null);
 
     const data = [];
-    const server = new Socket.Server(...serverArgs);
-    const client = new Socket(...clientArgs);
+    const server = new Socket.Server(...serverArgs());
+    const client = new Socket(...clientArgs());
     const opened = new Promise((res, _ )=> client.addEventListener("open", res));
     await new Promise((res, _) => {
       server.on("connection", socket =>
@@ -42,14 +51,14 @@ function testSocket(Socket, clientArgs, serverArgs) {
     await database.ref().set(null);
 
     const data = [];
-    const server = new Socket.Server(...serverArgs);
+    const server = new Socket.Server(...serverArgs());
     server.on("connection", socket => {
       socket.send("a");
       socket.send("b");
       socket.send("c");
     });
 
-    const client = new Socket(...clientArgs);
+    const client = new Socket(...clientArgs());
 
     await new Promise((res, _) => {
       client.addEventListener("message", o => {
@@ -67,16 +76,16 @@ function testSocket(Socket, clientArgs, serverArgs) {
 
   it("has readyState properties", () => {
     expect(Socket.CONNECTING).toBe(0);
-    expect(new Socket(...clientArgs).CONNECTING).toBe(0);
+    expect(new Socket(...clientArgs()).CONNECTING).toBe(0);
   });
 
   it("readyState changes", async done => {
     await database.ref().set(null);
 
-    const client = new Socket(...clientArgs);
+    const client = new Socket(...clientArgs());
     expect(client.readyState).toBe(Socket.CONNECTING);
 
-    const server = new Socket.Server(...serverArgs);
+    const server = new Socket.Server(...serverArgs());
 
     const afterOpen = await new Promise((res, _) => {
       client.addEventListener("open", () => {
