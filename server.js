@@ -24,6 +24,7 @@ class Server {
    * @param {firebase.database.DataSnapshot} snapshot
    */
   onConnection(snapshot) {
+    // TODO use the options ctor on FireSocket instead of this
     const socket = new Socket(this.database.ref(`user/${snapshot.key}`), this.database.ref(`server/${snapshot.key}`));
     this.callbacks.get("connection").forEach(cb => cb(socket));
   }

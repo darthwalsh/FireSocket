@@ -2,10 +2,10 @@
   "name": "firesocket",
   "version": "1.0.0",
   "description": "A drop-in replacement for WebSocket using Firebase Realtime Database",
-  "main": "firesocket-server.js",
+  "main": "index.js",
   "scripts": {
     "prepare": "typings install",
-    "build": "npx browserify firesocket-browser.js -o build-browser.js",
+    "build": "npx browserify firesocket.js -o build-browser.js",
     "pretest": "eslint --fix *.js spec && tsc -p jsconfig.json",
     "test": "firebase emulators:exec --only database \"jasmine\"",
     "local": "firebase emulators:start --only database"

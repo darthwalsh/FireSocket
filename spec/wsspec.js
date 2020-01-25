@@ -8,7 +8,7 @@ const firebase = testing.initializeTestApp({
 const database = firebase.database();
 
 describe("firesocket baseline",
-  () => testSocket(require("../firesocket-server"),
+  () => testSocket(require("../firesocket"),
     () => ["user1", firebase],
     () => [database]));
 let port = 8082;

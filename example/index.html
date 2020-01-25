@@ -10,26 +10,28 @@
     <div style="display: flex">
       <input id="input" type="input" style="width:100%" /><input id="submit" type="submit" />
     </div>
-    <script defer>
-      const Socket = FireSocket || WebSocket;
-      
-      const chat = document.getElementById("chat");
-      const input = document.getElementById("input");
+    <script>
+      window.onload = () => {
+        const Socket = FireSocket || WebSocket;
+        
+        const chat = document.getElementById("chat");
+        const input = document.getElementById("input");
 
-      const ws = new Socket(window.location.href.replace("http", "ws"));
-      ws.addEventListener("open", () => {
-        document.getElementById("submit").onclick = submit;
-        input.onkeydown = (e) => { if (e.key === "Enter") submit(); }
-      });
-      ws.addEventListener("message", ev => {
-        chat.textContent += ev.data + "\n";
-        chat.style.height = "auto";
-        chat.style.height = chat.scrollHeight + "px";
-      });
+        const ws = new Socket(window.location.href.replace("http", "ws"));
+        ws.addEventListener("open", () => {
+          document.getElementById("submit").onclick = submit;
+          input.onkeydown = (e) => { if (e.key === "Enter") submit(); }
+        });
+        ws.addEventListener("message", ev => {
+          chat.textContent += ev.data + "\n";
+          chat.style.height = "auto";
+          chat.style.height = chat.scrollHeight + "px";
+        });
 
-      function submit() {
-        ws.send(input.value);
-        input.value = "";
+        function submit() {
+          ws.send(input.value);
+          input.value = "";
+        }
       }
     </script>
   </body>

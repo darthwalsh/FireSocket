@@ -3,7 +3,6 @@
 const FireSocket = require("./firesocket");
 const Server = require("./server");
 
-// @ts-ignore
-FireSocket.Server = Server;
+FireSocket["Server"] = Server;
 
 module.exports = FireSocket;

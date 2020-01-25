@@ -2,7 +2,7 @@
 /** @typedef {import("firebase")} Firebase */
 
 const Server = require("../server");
-const FireSocket = require("../firesocket-server");
+const FireSocket = require("../firesocket");
 
 const testing = require("@firebase/testing");
 const firebase = /** @type {Firebase} */(/** @type {unknown} */(testing.initializeTestApp({

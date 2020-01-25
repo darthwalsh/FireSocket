@@ -7,7 +7,6 @@ const app = express();
 app.use(express.static(__dirname));
 const server = app.listen(8080, () => console.log("Running on http://localhost:8080"));
 
-/** @type import("../firesocket-server").Server */
 let wss;
 switch (process.argv[2]) {
   case "ws":
@@ -15,7 +14,7 @@ switch (process.argv[2]) {
     wss = new ws.Server({server});
     break;
   case "fs":
-    const firesocket = require("../firesocket-server");
+    const firesocket = require("../index");
     // gcloud iam service-accounts keys create .test-creds.json --iam-account server@firesocket-test.iam.gserviceaccount.com
     const creds = require("./.test-creds.json");
     const config = {
