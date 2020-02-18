@@ -7,7 +7,7 @@
     "prepare": "typings install",
     "build": "npx browserify firesocket-browser.js -o build-browser.js",
     "pretest": "eslint --fix *.js spec && tsc -p jsconfig.json",
-    "test": "firebase emulators:exec --only database \"jasmine\"",
+    "test": "firebase emulators:exec --only database --debug \"jasmine\"",
     "local": "firebase emulators:start --only database"
   },
   "repository": {
