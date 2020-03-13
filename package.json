@@ -43,7 +43,7 @@
     "jasmine-reporters": "2.3.2",
     "typescript": "3.8.3",
     "typings": "2.1.1",
-    "ws": "7.2.2"
+    "ws": "7.2.3"
   },
   "dependencies": {
     "firebase-admin": "^8.9.0"
