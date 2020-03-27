@@ -34,7 +34,7 @@
     "@firebase/testing": "0.18.0",
     "@types/express": "4.17.3",
     "@types/jasmine": "3.5.10",
-    "@types/node": "12.12.24",
+    "@types/node": "12.12.31",
     "@types/ws": "7.2.3",
     "eslint": "6.8.0",
     "eslint-config-google": "0.14.0",
