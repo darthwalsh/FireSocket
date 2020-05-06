@@ -14,35 +14,42 @@ TODO(example) example code showing where to plugin public/secret firebase config
 
 ### Firebase setup
 
-- Create [Firebase](https://console.firebase.google.com/) project
-- Set up [Database](https://console.firebase.google.com/u/0/project/firesocket-test/database) in locked mode
-- Set up [Authentication](https://console.firebase.google.com/u/0/project/firesocket-test/authentication)
+- Run `npm install firesocket`
+- [Install](https://firebase.google.com/docs/cli#install_the_firebase_cli) `firebase` cli
+- Set up [Realtime Database](https://firebase.google.com/docs/database) security rules
+  - Run `firebase login`
+  - Run `firebase init` 
+    - Create new project or use existing project created in [Console](https://console.firebase.google.com/)
+    - Select Database
+    - For security rules, use the path `node_modules/firesocket/database.rules.json`
+    - Don't delete the existing file
+  - Run `firebase deploy --only database`
+- Set up [Authentication](https://firebase.google.com/docs/auth)
+  - https://console.firebase.google.com/u/0/project/\_/authentication
   - Enable Anonymous, and/or another provider to allow for resumption of socket connection
 - Set up [Admin Authentication](https://firebase.google.com/docs/database/admin/start#admin-sdk-authentication) using a [Service Account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#overview)
   - Open [IAM Service accounts](https://console.developers.google.com/iam-admin/serviceaccounts)
-  - Suggested name "server"
-  - Give permission "Firebase Realtime Database Admin"
-  - TODO can use application default credentials?
-  - (MAYBE only for local testing) Create a JSON key and [store it securely](https://cloud.google.com/iam/docs/understanding-service-accounts#managing_service_account_keys)
-- Set up database security rules
-  - Run `firebase login` then `firebase init` 
-  - In `firebase.json` change `database.rules` path to `node_modules/firesocket/database.rules.json`
-  - TODO verify this works
-  - Run `firebase deploy --only database`
-- TODO links have firesocket-test?
+  - Permissing needed is "Firebase Realtime Database Admin": `roles/firebasedatabase.admin`
+  - If running in GCP, add admin policy to your default service account
+  - OR
+  - Create new service account, name i.e. "server", give admin policy
+  - For non-GCP servers or local testing, create service account credentials and [store it securely](https://cloud.google.com/iam/docs/understanding-service-accounts#managing_service_account_keys)
+    - `gcloud iam service-accounts keys create .test-creds.json --iam-account example@example.com`
+    - set `$env:GOOGLE_APPLICATION_CREDENTIALS=".test-creds.json"`
 
 ### App setup
 
 - On the web server, change `WebSocket` to `FireSocket`
   - `require("firesocket")`
   - (TODO split up browser part) If clients are browser-based, use `firesocket.Server.createFromCreds` factory to create Server.
-  - The returned `FireSocket.Server` object is compatible with `WebSocket.Server`
-- Download the client public config for web app
-  - https://support.google.com/firebase/answer/7015592
+  - The returned `FireSocket.Server` object is API-compatible with `WebSocket.Server`
+- Download the Firebase client public [JSON config](https://support.google.com/firebase/answer/7015592) for web app
   - The web server is expected to serve this JSON at `/firebase-config.json`
-- Add the `firesocket.js` script before your web app's logic
-  - Replace `WebSocket` with `FireSocket` (the constructor args are ignored)
-  - The `FireSocket` object is compatible with `WebSocket`
+  - (TODO API) the `firesocket.Server` helper will add this to your express server
+- Add the script `/firesocket.js` before your web app's logic
+  - Replace `WebSocket` with `FireSocket` (constructor args are ignored)
+  - The `FireSocket` object is API-compatible with `WebSocket`
+  - (TODO API) the `firesocket.Server` helper will serve this script
 
 ## Roadmap to release 1.0
 - Basic parity with ws functionality
@@ -70,6 +77,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - ~~Github status checks on build success~~
   - https://medium.com/@Philmod/npm-release-automation-adb970e49066
 - firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
+- Get vs code typing for firesocket.Server working
 - Any TODOs left in README
 - Any TODOs left in code, maybe won't fix
 

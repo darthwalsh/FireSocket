@@ -16,8 +16,8 @@ switch (process.argv[2]) {
     break;
   case "fs":
     const firesocket = require("../firesocket-server");
+    // To run locally, set the env variable GOOGLE_APPLICATION_CREDENTIALS to this JSON path
     // gcloud iam service-accounts keys create .test-creds.json --iam-account server@firesocket-test.iam.gserviceaccount.com
-    const creds = require("./.test-creds.json");
     const config = {
       projectId: "firesocket-test",
       apiKey: "AIzaSyDOkMdK66buENmR9Hx5rnsHOQi2G2g7CZY",
@@ -25,7 +25,6 @@ switch (process.argv[2]) {
       authDomain: "firesocket-test.firebaseapp.com",
     };
     wss = firesocket.Server.createFromCreds(
-      creds,
       "https://firesocket-test.firebaseio.com",
       {app, config},
     );

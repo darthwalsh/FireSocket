@@ -61,14 +61,14 @@ class Server {
 // TODO test?
 /**
  * helper constructor to avoid using firebase directly
- * @param {string} json JSON string with service account credentials
+ * use application default credentials (https://firebase.google.com/docs/admin/setup#initialize-sdk) 
  * @param {string} databaseUrl e.g. "https://databaseName.firebaseio.com"
  * @param {object} options
  * @param {Express} [options.app] Express app to serve firesocket client lib
  * @param {object} [options.config] Firebase client config
  * @returns Server
  */
-function createFromCreds(json, databaseUrl, options) {
+function createFromCreds(databaseUrl, options) {
   if (options.app) {
     options.app.use("/firesocket.js", (_, res) => res.sendFile("build-browser.js", {root: __dirname}));
     options.app.use("/firebase-config.json", (_, res) => res.json(options.config));
@@ -76,7 +76,7 @@ function createFromCreds(json, databaseUrl, options) {
 
   const admin = require("firebase-admin");
   admin.initializeApp({
-    credential: admin.credential.cert(json),
+    credential: admin.credential.applicationDefault(),
     databaseURL: databaseUrl,
   });
   return new Server(/** @type {any} */(admin.database()));
