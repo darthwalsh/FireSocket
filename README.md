@@ -1,3 +1,5 @@
+[![npm](https://img.shields.io/npm/v/firesocket)](https://www.npmjs.com/package/firesocket)
+
 # FireSocket
 
 A drop-in replacement for WebSocket using [Firebase Realtime Database](https://firebase.google.com/docs/database).
@@ -25,7 +27,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
     - Don't delete the existing file
   - Run `firebase deploy --only database`
 - Set up [Authentication](https://firebase.google.com/docs/auth)
-  - https://console.firebase.google.com/u/0/project/\_/authentication
+  - https://console.firebase.google.com/u/0/project/_/authentication
   - Enable Anonymous, and/or another provider to allow for resumption of socket connection
 - Set up [Admin Authentication](https://firebase.google.com/docs/database/admin/start#admin-sdk-authentication) using a [Service Account](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#overview)
   - Open [IAM Service accounts](https://console.developers.google.com/iam-admin/serviceaccounts)
@@ -73,6 +75,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - ~~running tests in Cloud Build~~
   - ~~Set up using separate project~~
   - ~~Link from here to README in spec doc~~
+  - ~~npm badge~~
   - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
   - ~~Github status checks on build success~~
   - https://medium.com/@Philmod/npm-release-automation-adb970e49066
