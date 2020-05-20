@@ -8,7 +8,8 @@
     "build": "npx browserify firesocket-browser.js -o build-browser.js",
     "pretest": "eslint --fix *.js spec && tsc -p jsconfig.json",
     "test": "firebase emulators:exec --only database --debug \"jasmine\"",
-    "local": "firebase emulators:start --only database"
+    "local": "firebase emulators:start --only database",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
     "firebase-tools": "8.3.0",
     "jasmine": "3.5.0",
     "jasmine-reporters": "2.3.2",
+    "semantic-release": "^17.0.7",
     "typescript": "3.9.3",
     "typings": "2.1.1",
     "ws": "7.3.0"

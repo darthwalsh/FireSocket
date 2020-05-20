@@ -1,6 +1,13 @@
 steps:
-- name: 'gcr.io/$PROJECT_ID/npm-with-java8'
-  args: ['install']
-- name: 'gcr.io/$PROJECT_ID/npm-with-java8'
-  args: ['test']
-  
+  - name: "gcr.io/$PROJECT_ID/npm-with-java8"
+    args: ["install"]
+  - name: "gcr.io/$PROJECT_ID/npm-with-java8"
+    args: ["test"]
+  - name: "gcr.io/$PROJECT_ID/npm-with-java8"
+    args: ["semantic-release"]
+    secretEnv: ["GH_TOKEN", "NPM_TOKEN"]
+secrets:
+  - kmsKeyName: projects/$PROJECT_ID/locations/global/keyRings/ring/cryptoKeys/key
+    secretEnv:
+      GH_TOKEN: "CiQA9ejEtm61r8Z/bOgdSxX4bLGpNh5TL//te4TmkME8yxsDY5USUQB0N8tIzt1PqKiT6i56H25JFqGRGezOzWv4oWwnupwRRL9+PN7YAtXGdQTlDpCHO3ag6cxNbELPTufmXY22mZ0dO0TmXB3ZrguXBykdiwCFRw=="
+      NPM_TOKEN: "CiQA9ejEtlgkk+t0zVzd1UbjeBiGlSiiyi9Wli47jBYz0VNaXkkSTQB0N8tISxOa+mJQw6KGg352xRUXu7M5F/30u3nkCHvAC7PftbApWsnbLJmMYg+zJhn1AqnmFB7XN1lDQs1AgFXjdUyni1RhR6phwb9T"
