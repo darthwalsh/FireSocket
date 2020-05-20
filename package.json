@@ -9,7 +9,7 @@
     "pretest": "eslint --fix *.js spec && tsc -p jsconfig.json",
     "test": "firebase emulators:exec --only database --debug \"jasmine\"",
     "local": "firebase emulators:start --only database",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release --no-ci"
   },
   "repository": {
     "type": "git",
