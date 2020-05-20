@@ -4,7 +4,7 @@ steps:
   - name: "gcr.io/$PROJECT_ID/npm-with-java8"
     args: ["test"]
   - name: "gcr.io/$PROJECT_ID/npm-with-java8"
-    args: ["semantic-release"]
+    args: ["run", "semantic-release"]
     secretEnv: ["GH_TOKEN", "NPM_TOKEN"]
 secrets:
   - kmsKeyName: projects/firesocket-test/locations/global/keyRings/ring/cryptoKeys/key
