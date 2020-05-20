@@ -1,4 +1,6 @@
 steps:
+  - name: gcr.io/cloud-builders/git
+    args: ["clone", "https://github.com/darthwalsh/FireSocket.git"]
   - name: "gcr.io/$PROJECT_ID/npm-with-java8"
     args: ["install"]
   - name: "gcr.io/$PROJECT_ID/npm-with-java8"
