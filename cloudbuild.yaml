@@ -7,6 +7,7 @@ steps:
       set -eux
       
       # cloudbuild doesn't check out the .git directory with full history
+      shopt -s dotglob && rm -rf *
       git init
       git remote add origin https://github.com/darthwalsh/FireSocket.git
       git fetch origin
