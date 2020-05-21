@@ -16,6 +16,8 @@ steps:
   - name: "gcr.io/$PROJECT_ID/npm-with-java8"
     args: ["install"]
   - name: "gcr.io/$PROJECT_ID/npm-with-java8"
+    args: ["run", "build"]
+  - name: "gcr.io/$PROJECT_ID/npm-with-java8"
     args: ["test"]
   - name: "gcr.io/$PROJECT_ID/npm-with-java8"
     args: ["run", "semantic-release"]
