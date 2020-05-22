@@ -59,6 +59,8 @@ class Server {
 }
 
 // TODO test?
+// TODO could databaseUrl be inferred from projectId?
+// TODO just make this the FireSocket.Server constructor?
 /**
  * helper constructor to avoid using firebase directly
  * use application default credentials (https://firebase.google.com/docs/admin/setup#initialize-sdk) 

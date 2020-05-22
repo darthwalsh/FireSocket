@@ -4,15 +4,53 @@
 
 A drop-in replacement for WebSocket using [Firebase Realtime Database](https://firebase.google.com/docs/database).
 
-## Example
+## Examples
 
-A full example showing dynamically switching between FireSocket and WebSocket is in [example/](example/).
+An example showing dynamically switching between FireSocket and WebSocket is in [example/](example/).
+
+A [full example](https://github.com/darthwalsh/FireSocketExample) is running at https://firesocketexample.appspot.com/.
 
 ### Code changes
 
-TODO(example) example snippet
+#### Before with WebSocket
 
-TODO(example) example code showing where to plugin public/secret firebase config
+server:
+
+```javascript
+const express = require("express");
+const ws = require("ws");
+const app = express();
+const wss = new ws.Server({server});
+
+wss.on("connection", ws => ...
+```
+
+client:
+
+```javascript
+const ws = new WebSocket(window.location.href.replace("http", "ws"));
+ws.addEventListener("open", () => ...
+```
+
+#### Using FireSocket
+
+server:
+
+```javascript
+const firesocket = require("firesocket");
+const express = require("express");
+const app = express();
+const wss = firesocket.Server.createFromCreds(databaseUrl, {app, firebaseConfig});
+
+wss.on("connection", ws => ...
+```
+
+client:
+
+```javascript
+const ws = new FireSocket(); // Args are ignored
+ws.addEventListener("open", () => ...
+```
 
 ### Firebase setup
 
@@ -78,7 +116,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
   - ~~npm badge~~
   - [build badges](https://ljvmiranda921.github.io/notebook/2018/12/21/cloud-build-badge/)
   - ~~Github status checks on build success~~
-  - https://medium.com/@Philmod/npm-release-automation-adb970e49066
+  - ~~https://medium.com/@Philmod/npm-release-automation-adb970e49066~~
 - firebase disconnect messages [using onDisconnect](https://firebase.google.com/docs/database/web/offline-capabilities#how-ondisconnect-works)
 - Get vs code typing for firesocket.Server working
 - Any TODOs left in README
@@ -91,7 +129,7 @@ TODO(example) example code showing where to plugin public/secret firebase config
 
 ## Testing
 
-Like normal, run `npm test` to run all tests. This includes unit tests, and mock tests using the firebase emulator and a local WebSocket server. See [spec/](spec/README.md) for more information.
+Run `npm test` to run all tests. This includes unit tests, and mock tests using the firebase emulator and a local WebSocket server. See [spec/](spec/README.md) for more information.
 
 The [example/](example/) can be useful for manually debugging changes.
 
