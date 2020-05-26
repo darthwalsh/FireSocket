@@ -6,6 +6,10 @@
         "preset": "angular",
         "releaseRules": [
           {
+            "type": "chore",
+            "release": false
+          },
+          {
             "type": null,
             "release": "patch"
           }
