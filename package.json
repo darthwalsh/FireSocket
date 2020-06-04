@@ -45,7 +45,7 @@
     "jasmine": "3.5.0",
     "jasmine-reporters": "2.3.2",
     "semantic-release": "17.0.8",
-    "typescript": "3.9.3",
+    "typescript": "3.9.5",
     "typings": "2.1.1",
     "ws": "7.3.0"
   },
