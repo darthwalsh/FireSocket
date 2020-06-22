@@ -34,7 +34,7 @@
     "socket.js"
   ],
   "devDependencies": {
-    "@firebase/testing": "0.20.3",
+    "@firebase/testing": "0.20.4",
     "@types/express": "4.17.6",
     "@types/jasmine": "3.5.10",
     "@types/node": "12.12.31",
