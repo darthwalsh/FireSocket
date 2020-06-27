@@ -63,7 +63,7 @@ class Server {
 // TODO just make this the FireSocket.Server constructor?
 /**
  * helper constructor to avoid using firebase directly
- * use application default credentials (https://firebase.google.com/docs/admin/setup#initialize-sdk) 
+ * use application default credentials (https://firebase.google.com/docs/admin/setup#initialize-sdk)
  * @param {string} databaseUrl e.g. "https://databaseName.firebaseio.com"
  * @param {object} options
  * @param {Express} [options.app] Express app to serve firesocket client lib
