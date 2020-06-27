@@ -10,14 +10,15 @@ class FireSocket {
    */
   constructor(uid, firebase) {
     this.database = firebase.database();
-    this.callbacks = new Map([ // events not in common with socket
+    this.callbacks = new Map([
+      // events not in common with socket
       ["open", []],
     ]);
     this.readyState = FireSocket.CONNECTING;
     const write = this.database.ref(`user/${uid}`);
     write.update({"__CONNECTION": true}, () => this.onOpen());
     const read = this.database.ref(`server/${uid}`);
-    this.socket = new Socket(/** @type {any} */(read), /** @type {any} */(write));
+    this.socket = new Socket(/** @type {any} */ (read), /** @type {any} */ (write));
   }
 
   onOpen() {
@@ -44,16 +45,16 @@ class FireSocket {
    */
 
   /**
-    * @param {'open' | 'close' | 'message'} event
-    * @param {onEvent} cb
-    */
+   * @param {'open' | 'close' | 'message'} event
+   * @param {onEvent} cb
+   */
   addEventListener(event, cb) {
     // TODO(close) actually fire the close event and set the readyState
     const arr = this.callbacks.get(event);
     if (arr) {
       arr.push(cb);
     } else {
-      this.socket.addEventListener(/** @type {any} **/(event), cb);
+      this.socket.addEventListener(/** @type {any} **/ (event), cb);
     }
   }
 

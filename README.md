@@ -58,7 +58,7 @@ ws.addEventListener("open", () => ...
 - [Install](https://firebase.google.com/docs/cli#install_the_firebase_cli) `firebase` cli
 - Set up [Realtime Database](https://firebase.google.com/docs/database) security rules
   - Run `firebase login`
-  - Run `firebase init` 
+  - Run `firebase init`
     - Create new project or use existing project created in [Console](https://console.firebase.google.com/)
     - Select Database
     - For security rules, use the path `node_modules/firesocket/database.rules.json`
@@ -92,6 +92,7 @@ ws.addEventListener("open", () => ...
   - (TODO API) the `firesocket.Server` helper will serve this script
 
 ## Roadmap to release 1.0
+
 - Basic parity with ws functionality
   - ~~message~~
   - ~~send~~
@@ -125,7 +126,7 @@ ws.addEventListener("open", () => ...
 ## Future improvements
 
 - [ ] Authentication is pluggable, so app can swap in email/SMS/OAuth sign-in
-- [ ] [Generate type declarations](https://github.com/microsoft/TypeScript/pull/32372) instead of relying on cast to WebSocket 
+- [ ] [Generate type declarations](https://github.com/microsoft/TypeScript/pull/32372) instead of relying on cast to WebSocket
 
 ## Testing
 
@@ -136,21 +137,22 @@ The [example/](example/) can be useful for manually debugging changes.
 ## Motivation for client-server communication
 
 ### WebSocket
+
 The default client-server communication, and by far the fastest. It's pretty simple for a [web game](https://github.com/darthwalsh/Austerity/blob/3bd2cfb825eaf8d537945c02da5b96bfe38ddca7/server/connection.js) to just update state and issue questions based on player events.
 
 Downsides:
 
-* Cheap hosting servers don't allow many simultaneous connections, if any
-* Messages are not persisted, so a server reboot will wipe out any app state
+- Cheap hosting servers don't allow many simultaneous connections, if any
+- Messages are not persisted, so a server reboot will wipe out any app state
 
 ### Firebase Database
 
-Using [Firebase Realtime Database](https://firebase.google.com/docs/database), it is possible to emulate WebSocket messages. 
+Using [Firebase Realtime Database](https://firebase.google.com/docs/database), it is possible to emulate WebSocket messages.
 
 This fixes both limitations:
 
-* Firebase is free for [100 connections users](https://firebase.google.com/pricing/), with pay-as-you-go up to 200k.
-* When the server restarts it can event-source state from the database
+- Firebase is free for [100 connections users](https://firebase.google.com/pricing/), with pay-as-you-go up to 200k.
+- When the server restarts it can event-source state from the database
 
 Realtime Database was picked over Firestore because the average round trip latency of 600ms is fast enough to barely be noticed by users, while Firestore is noticeably slower at 1500ms.
 [medium.com](https://medium.com/@d8schreiber/firebase-performance-firestore-and-realtime-database-latency-13effcade26d)
@@ -163,7 +165,7 @@ Each game is composed of messages from server to client, and v/v.
 
 Each firebase client listens for `child_added` on their message queue.
 
-Here, user* is a userID from Firebase Authentication
+Here, user\* is a userID from Firebase Authentication
 
     user:
         userWQ3mVT:

@@ -8,7 +8,7 @@ While tests are running, http://localhost:9000/.json?ns=testDb will show the sta
 
 Other than npm dependencies, the local version of firebase installed with `@firebase/testing` also requires that java is installed locally.
 
-To test in Cloud Build, the docker image needs both npm and java installed. [docker/Dockerfile](docker/Dockerfile) specifies how to create such an image, and you can use Cloud Build to publish the image by running 
+To test in Cloud Build, the docker image needs both npm and java installed. [docker/Dockerfile](docker/Dockerfile) specifies how to create such an image, and you can use Cloud Build to publish the image by running
 
 ```
 gcloud builds submit --config cloudbuild.yaml .

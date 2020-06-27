@@ -12,9 +12,14 @@ class Server {
     this.database = database;
     this.clients = /** @type {Socket[]} */ ([]);
     this.callbacks = new Map([
-      ["connection", [socket => {
-        this.clients.push(socket);
-      }]],
+      [
+        "connection",
+        [
+          socket => {
+            this.clients.push(socket);
+          },
+        ],
+      ],
     ]);
     this.userRef = this.database.ref("user");
     setTimeout(() => this.userRef.on("child_added", ss => this.onConnection(ss)));
@@ -24,15 +29,17 @@ class Server {
    * @param {firebase.database.DataSnapshot} snapshot
    */
   onConnection(snapshot) {
-    const socket = new Socket(this.database.ref(`user/${snapshot.key}`), this.database.ref(`server/${snapshot.key}`));
+    const socket = new Socket(
+      this.database.ref(`user/${snapshot.key}`),
+      this.database.ref(`server/${snapshot.key}`)
+    );
     this.callbacks.get("connection").forEach(cb => cb(socket));
   }
 
-
   /**
-  * @param {'connection'} event
-  * @param {(socket: Socket) => void} cb
-  */
+   * @param {'connection'} event
+   * @param {(socket: Socket) => void} cb
+   */
   on(event, cb) {
     const arr = this.callbacks.get(event);
     if (!arr) {
@@ -72,7 +79,9 @@ class Server {
  */
 function createFromCreds(databaseUrl, options) {
   if (options.app) {
-    options.app.use("/firesocket.js", (_, res) => res.sendFile("build-browser.js", {root: __dirname}));
+    options.app.use("/firesocket.js", (_, res) =>
+      res.sendFile("build-browser.js", {root: __dirname})
+    );
     options.app.use("/firebase-config.json", (_, res) => res.json(options.config));
   }
 
@@ -81,7 +90,7 @@ function createFromCreds(databaseUrl, options) {
     credential: admin.credential.applicationDefault(),
     databaseURL: databaseUrl,
   });
-  return new Server(/** @type {any} */(admin.database()));
+  return new Server(/** @type {any} */ (admin.database()));
 }
 Server.createFromCreds = createFromCreds;
 

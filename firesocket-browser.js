@@ -9,12 +9,14 @@ class FireSocket {
   constructor() {
     this.fireSocket = /** @type {FireSocketCommon} */ (null);
 
-    this.fireLoaded = Promise.all([this.loadConfig(), ...["app", "auth", "database"].map(c => this.loadFire(c))])
-      .then(async ([config]) => {
-        this.getGlobalFireBase().initializeApp(config);
-        const uid = await this.signInUser(this.getGlobalFireBase());
-        this.fireSocket = new FireSocketCommon(uid, this.getGlobalFireBase());
-      });
+    this.fireLoaded = Promise.all([
+      this.loadConfig(),
+      ...["app", "auth", "database"].map(c => this.loadFire(c)),
+    ]).then(async ([config]) => {
+      this.getGlobalFireBase().initializeApp(config);
+      const uid = await this.signInUser(this.getGlobalFireBase());
+      this.fireSocket = new FireSocketCommon(uid, this.getGlobalFireBase());
+    });
   }
 
   loadFire(component) {
@@ -36,8 +38,8 @@ class FireSocket {
   }
 
   /**
-  * @returns {firebase}
-  */
+   * @returns {firebase}
+   */
   getGlobalFireBase() {
     // @ts-ignore global loaded by the html scripts
     return typeof firebase !== "undefined" && firebase;
@@ -68,7 +70,7 @@ for (const k of Object.getOwnPropertyNames(FireSocketCommon.prototype)) {
   if (typeof v === "number") {
     FireSocket.prototype[k] = v;
   } else if (typeof v === "function") {
-    FireSocket.prototype[k] = function(...args) {
+    FireSocket.prototype[k] = function (...args) {
       this.fireLoaded.then(() => this.fireSocket[k](...args));
     };
   } else {

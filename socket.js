@@ -16,7 +16,8 @@ class Socket {
    * @param {firebase.database.DataSnapshot} snapshot
    */
   onMessage(snapshot) {
-    if (snapshot.key === "__CONNECTION") { // if switch to metadata records, create {kind: connection, data: ...}?
+    if (snapshot.key === "__CONNECTION") {
+      // if switch to metadata records, create {kind: connection, data: ...}?
       return;
     }
     const data = snapshot.val();
@@ -29,9 +30,9 @@ class Socket {
     this.write.push().set(data);
   }
   /**
-    * @param {'message'} event
-    * @param {({data: any}) => void} cb
-    */
+   * @param {'message'} event
+   * @param {({data: any}) => void} cb
+   */
   addEventListener(event, cb) {
     const arr = this.callbacks.get(event);
     if (!arr) {

@@ -7,15 +7,19 @@ const firebase = testing.initializeTestApp({
 });
 const database = firebase.database();
 
-describe("firesocket baseline",
-  () => testSocket(require("../firesocket-server"),
+describe("firesocket baseline", () =>
+  testSocket(
+    require("../firesocket-server"),
     () => ["user1", firebase],
-    () => [database]));
+    () => [database]
+  ));
 let port = 8082;
-describe("ws baseline",
-  () => testSocket(require("ws"),
+describe("ws baseline", () =>
+  testSocket(
+    require("ws"),
     () => ["ws://localhost:" + port],
-    () => [{port}]));
+    () => [{port}]
+  ));
 
 function testSocket(Socket, clientArgs, serverArgs) {
   beforeEach(() => ++port);
@@ -26,7 +30,7 @@ function testSocket(Socket, clientArgs, serverArgs) {
     const data = [];
     const server = new Socket.Server(...serverArgs());
     const client = new Socket(...clientArgs());
-    const opened = new Promise((res, _ )=> client.addEventListener("open", res));
+    const opened = new Promise((res, _) => client.addEventListener("open", res));
     await new Promise((res, _) => {
       server.on("connection", socket =>
         socket.addEventListener("message", o => {
@@ -34,7 +38,8 @@ function testSocket(Socket, clientArgs, serverArgs) {
           if (data.length === 3) {
             res();
           }
-        }));
+        })
+      );
       opened.then(() => {
         client.send("a");
         client.send("b");

@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>title</title>
     <script src="firesocket.js"></script>
   </head>
   <body>
-    <textarea id="chat" readonly style="width:100%"></textarea> <br>
-    <div style="display: flex">
-      <input id="input" type="input" style="width:100%" /><input id="submit" type="submit" />
+    <textarea id="chat" readonly style="width: 100%;"></textarea>
+    <br />
+    <div style="display: flex;">
+      <input id="input" type="input" style="width: 100%;" />
+      <input id="submit" type="submit" />
     </div>
     <script defer>
       const Socket = FireSocket || WebSocket;
-      
+
       const chat = document.getElementById("chat");
       const input = document.getElementById("input");
 
       const ws = new Socket(window.location.href.replace("http", "ws"));
       ws.addEventListener("open", () => {
         document.getElementById("submit").onclick = submit;
-        input.onkeydown = (e) => { if (e.key === "Enter") submit(); }
+        input.onkeydown = e => {
+          if (e.key === "Enter") submit();
+        };
       });
       ws.addEventListener("message", ev => {
         chat.textContent += ev.data + "\n";

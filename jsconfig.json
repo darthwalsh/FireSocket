@@ -1,20 +1,18 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "skipLibCheck": true,
-      "paths": { "*": ["types/*"] },
-      "lib": ["dom"],
-      "target": "esnext",
-      "checkJs": true,
-      "moduleResolution": "node"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "paths": {"*": ["types/*"]},
+    "lib": ["dom"],
+    "target": "esnext",
+    "checkJs": true,
+    "moduleResolution": "node"
 
     //   "forceConsistentCasingInFileNames": true,
     //   "noImplicitReturns": true,
     //   "strict": true,
     //   "noUnusedLocals": true,
-    },
+  },
 
-    "exclude": [
-      "build-browser.js"
-    ]
+  "exclude": ["build-browser.js"]
 }

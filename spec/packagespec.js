@@ -9,9 +9,13 @@ describe("package.json", () => {
 
     expect(files.length).toBeGreaterThan(0);
 
-    const missing = (await Promise.all(files.map(existsRoot))).filter(({exists}) => !exists).map(({file}) => file);
+    const missing = (await Promise.all(files.map(existsRoot)))
+      .filter(({exists}) => !exists)
+      .map(({file}) => file);
 
-    expect(missing.length).withContext("Missing: " + missing.join()).toBeFalsy();
+    expect(missing.length)
+      .withContext("Missing: " + missing.join())
+      .toBeFalsy();
 
     done();
   });
@@ -22,6 +26,6 @@ describe("package.json", () => {
  */
 function existsRoot(file) {
   return new Promise(res =>
-    fs.exists(path.join(__dirname, "..", file), exists => res({file, exists})),
+    fs.exists(path.join(__dirname, "..", file), exists => res({file, exists}))
   );
 }

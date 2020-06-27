@@ -10,18 +10,14 @@
       "name": "start fs",
       "program": "${workspaceFolder}/example/server.js",
       "args": ["fs"],
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "type": "node",
       "request": "launch",
       "name": "cli",
       "program": "${workspaceFolder}\\example\\cli.js",
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }

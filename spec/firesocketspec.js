@@ -5,10 +5,12 @@ const Server = require("../server");
 const FireSocket = require("../firesocket-server");
 
 const testing = require("@firebase/testing");
-const firebase = /** @type {Firebase} */(/** @type {unknown} */(testing.initializeTestApp({
-  databaseName: "testDb",
-  auth: {uid: "alice"},
-})));
+const firebase = /** @type {Firebase} */ (
+  /** @type {unknown} */ (testing.initializeTestApp({
+    databaseName: "testDb",
+    auth: {uid: "alice"},
+  }))
+);
 const database = firebase.database();
 
 describe("exiting message", () => {
@@ -59,7 +61,8 @@ describe("sending", () => {
           if (data.length === 3) {
             res();
           }
-        }));
+        })
+      );
       client.send("a");
       client.send("b");
       client.send("c");

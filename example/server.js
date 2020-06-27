@@ -24,10 +24,10 @@ switch (process.argv[2]) {
       databaseURL: "https://firesocket-test.firebaseio.com",
       authDomain: "firesocket-test.firebaseapp.com",
     };
-    wss = firesocket.Server.createFromCreds(
-      "https://firesocket-test.firebaseio.com",
-      {app, config},
-    );
+    wss = firesocket.Server.createFromCreds("https://firesocket-test.firebaseio.com", {
+      app,
+      config,
+    });
     break;
   case undefined:
     console.error("usage: npm start [ws|fs]");
@@ -35,7 +35,8 @@ switch (process.argv[2]) {
 }
 
 wss.on("connection", ws => {
-  ws.addEventListener("message", data => { // TODO should support on()
+  ws.addEventListener("message", data => {
+    // TODO should support on()
     wss.clients.forEach(client => {
       if (client !== ws && client.readyState === client.OPEN) {
         client.send(data.data);

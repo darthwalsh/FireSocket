@@ -5,7 +5,7 @@ const readline = require("readline");
 const WebSocket = require("ws");
 
 (async () => {
-  const [, , url,] = process.argv;
+  const [, , url] = process.argv;
   if (!url) {
     console.error("Expected usage: cli [URL|fs]");
     process.exit(1);
@@ -31,9 +31,7 @@ const WebSocket = require("ws");
     const cred = await firebase.auth().signInAnonymously();
     ws = new FireSocket(cred.user.uid, firebase);
   }
-  ws.addEventListener("open", () =>
-    rl.on("line", input => ws.send(input))
-  );
+  ws.addEventListener("open", () => rl.on("line", input => ws.send(input)));
 
   ws.addEventListener("message", e => console.log(e.data));
 

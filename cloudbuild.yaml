@@ -1,18 +1,18 @@
 steps:
   - name: gcr.io/cloud-builders/git
-    entrypoint: 'bash'
+    entrypoint: "bash"
     args:
-    - '-c'
-    - |
-      set -eux
-      
-      # cloudbuild doesn't check out the .git directory with full history
-      shopt -s dotglob && rm -rf *
-      git init
-      git remote add origin https://github.com/darthwalsh/FireSocket.git
-      git fetch origin
-      git checkout $BRANCH_NAME
-      git reset --hard $COMMIT_SHA
+      - "-c"
+      - |
+        set -eux
+
+        # cloudbuild doesn't check out the .git directory with full history
+        shopt -s dotglob && rm -rf *
+        git init
+        git remote add origin https://github.com/darthwalsh/FireSocket.git
+        git fetch origin
+        git checkout $BRANCH_NAME
+        git reset --hard $COMMIT_SHA
   - name: "gcr.io/$PROJECT_ID/npm-with-java8"
     args: ["install"]
   - name: "gcr.io/$PROJECT_ID/npm-with-java8"

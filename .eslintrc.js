@@ -4,7 +4,7 @@ module.exports = {
     "es6": true,
     "node": true,
   },
-  "extends": ["eslint:recommended", "google"],
+  "extends": ["eslint:recommended", "google", "prettier"],
   "parserOptions": {
     "ecmaVersion": 2018,
   },
@@ -23,21 +23,7 @@ module.exports = {
     "eqeqeq": "error",
     "operator-assignment": "error",
     "object-shorthand": "error",
-    "quotes": ["error", "double"],
-    "arrow-parens": ["error", "as-needed"],
     "prefer-arrow-callback": "error",
     "arrow-body-style": "error",
-    "indent": [
-      "error", 2, {
-        "FunctionDeclaration": {
-          "body": 1,
-          "parameters": 2,
-        },
-        "FunctionExpression": {
-          "body": 1,
-          "parameters": 2,
-        },
-      },
-    ],
   },
 };
