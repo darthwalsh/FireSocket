@@ -37,10 +37,15 @@ class Server {
   }
 
   /**
-   * @param {'connection'} event
-   * @param {(socket: Socket) => void} cb
+   * @param {'connection' | 'listening'} event
+   * @param {(socket?: Socket) => void} cb
    */
   on(event, cb) {
+    if (event === "listening") {
+      setTimeout(cb);
+      return;
+    }
+
     const arr = this.callbacks.get(event);
     if (!arr) {
       throw new Error(`Unsupported event type ${event}`);

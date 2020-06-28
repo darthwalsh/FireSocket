@@ -29,6 +29,7 @@ function testSocket(Socket, clientArgs, serverArgs) {
 
     const data = [];
     const server = new Socket.Server(...serverArgs());
+    await listening(server);
     const client = new Socket(...clientArgs());
     const opened = new Promise((res, _) => client.addEventListener("open", res));
     await new Promise((res, _) => {
@@ -57,6 +58,7 @@ function testSocket(Socket, clientArgs, serverArgs) {
 
     const data = [];
     const server = new Socket.Server(...serverArgs());
+    await listening(server);
     server.on("connection", socket => {
       socket.send("a");
       socket.send("b");
@@ -89,16 +91,21 @@ function testSocket(Socket, clientArgs, serverArgs) {
 
     const client = new Socket(...clientArgs());
     expect(client.readyState).toBe(Socket.CONNECTING);
-
-    const server = new Socket.Server(...serverArgs());
-
-    const afterOpen = await new Promise((res, _) => {
+    const afterOpen = new Promise((res, _) => {
       client.addEventListener("open", () => {
         res(client.readyState);
       });
     });
-    expect(afterOpen).toBe(Socket.OPEN);
+
+    const server = new Socket.Server(...serverArgs());
+    await listening(server);
+
+    expect(await afterOpen).toBe(Socket.OPEN);
 
     server.close(done);
   });
+}
+
+function listening(server) {
+  return new Promise(res => server.on("listening", res));
 }
