@@ -1,5 +1,13 @@
 /* global describe it beforeEach expect */
 
+/*
+  If modifying this file to change the expected behavior, than run this before running tests:
+  export FIRESOCKET_RUN_WS_BASELINE=TRUE
+
+  The ws server is pretty flaky to repeated creation and closing on *nix, so not running all the time.
+*/
+
+const process = require("process");
 const testing = require("@firebase/testing");
 const firebase = testing.initializeTestApp({
   databaseName: "testDb",
@@ -14,12 +22,16 @@ describe("firesocket baseline", () =>
     () => [database]
   ));
 let port = 8082;
-describe("ws baseline", () =>
-  testSocket(
-    require("ws"),
-    () => ["ws://localhost:" + port],
-    () => [{port}]
-  ));
+
+if (process.env.FIRESOCKET_RUN_WS_BASELINE) {
+  console.log("Running WS_BASELINE tests");
+  describe("ws baseline", () =>
+    testSocket(
+      require("ws"),
+      () => ["ws://localhost:" + port],
+      () => [{port}]
+    ));
+}
 
 function testSocket(Socket, clientArgs, serverArgs) {
   beforeEach(() => ++port);
