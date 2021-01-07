@@ -41,7 +41,7 @@
     "eslint": "7.17.0",
     "eslint-config-google": "0.14.0",
     "eslint-config-prettier": "7.1.0",
-    "firebase-tools": "9.1.0",
+    "firebase-tools": "9.1.1",
     "jasmine": "3.6.3",
     "jasmine-reporters": "2.3.2",
     "semantic-release": "17.3.1",
