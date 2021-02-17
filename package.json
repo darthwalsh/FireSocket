@@ -44,7 +44,7 @@
     "firebase-tools": "9.4.0",
     "jasmine": "3.6.4",
     "jasmine-reporters": "2.3.2",
-    "semantic-release": "17.3.6",
+    "semantic-release": "17.3.9",
     "typescript": "4.1.3",
     "ws": "7.4.2"
   },
