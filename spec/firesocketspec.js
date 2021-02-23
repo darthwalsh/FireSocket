@@ -53,7 +53,7 @@ describe("sending", () => {
     const data = [];
     // @ts-ignore
     const server = new Server(database);
-    const client = new FireSocket("user1", firebase);
+    const client = new FireSocket("user3", firebase);
     await new Promise((res, _) => {
       server.on("connection", socket =>
         socket.addEventListener("message", o => {
@@ -80,12 +80,12 @@ describe("sending", () => {
     // @ts-ignore
     const server = new Server(database);
     server.on("connection", socket => {
-      socket.send("a");
-      socket.send("b");
-      socket.send("c");
+      socket.send("i");
+      socket.send("j");
+      socket.send("k");
     });
 
-    const client = new FireSocket("user1", firebase);
+    const client = new FireSocket("user4", firebase);
 
     await new Promise((res, _) => {
       client.addEventListener("message", o => {
@@ -96,7 +96,7 @@ describe("sending", () => {
       });
     });
 
-    expect(data).toEqual(["a", "b", "c"]);
+    expect(data).toEqual(["i", "j", "k"]);
 
     server.close(done);
   });
