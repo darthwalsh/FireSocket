@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 describe("package.json", () => {
-  it("all files exist", async done => {
+  it("all files exist", async () => {
     const package = require(path.join(__dirname, "..", "package.json"));
     const files = package.files;
 
@@ -16,8 +16,6 @@ describe("package.json", () => {
     expect(missing.length)
       .withContext("Missing: " + missing.join())
       .toBeFalsy();
-
-    done();
   });
 });
 

@@ -14,7 +14,7 @@ const firebase = /** @type {Firebase} */ (
 const database = firebase.database();
 
 describe("exiting message", () => {
-  it("on server", async done => {
+  it("on server", async () => {
     await database.ref().set({user: {user1: {0: "message1"}}});
 
     // @ts-ignore
@@ -28,10 +28,10 @@ describe("exiting message", () => {
 
     expect(data).toBe("message1");
 
-    server.close(done);
+    await new Promise((res, _) => server.close(res));
   });
 
-  it("on client", async done => {
+  it("on client", async () => {
     await database.ref().set({server: {user1: {0: "message1"}}});
 
     const client = new FireSocket("user1", firebase);
@@ -41,13 +41,11 @@ describe("exiting message", () => {
     });
 
     expect(data).toBe("message1");
-
-    done();
   });
 });
 
 describe("sending", () => {
-  it("client to server", async done => {
+  it("client to server", async () => {
     await database.ref().set(null);
 
     const data = [];
@@ -70,10 +68,10 @@ describe("sending", () => {
 
     expect(data).toEqual(["a", "b", "c"]);
 
-    server.close(done);
+    await new Promise((res, _) => server.close(res));
   });
 
-  it("server to client", async done => {
+  it("server to client", async () => {
     await database.ref().set(null);
 
     const data = [];
@@ -98,7 +96,7 @@ describe("sending", () => {
 
     expect(data).toEqual(["i", "j", "k"]);
 
-    server.close(done);
+    await new Promise((res, _) => server.close(res));
   });
 });
 
@@ -108,7 +106,7 @@ describe("readyState", () => {
     expect(new FireSocket("user1", firebase).CONNECTING).toBe(0);
   });
 
-  it("changes", async done => {
+  it("changes", async () => {
     await database.ref().set(null);
 
     const client = new FireSocket("user1", firebase);
@@ -124,7 +122,7 @@ describe("readyState", () => {
     });
     expect(afterOpen).toBe(FireSocket.OPEN);
 
-    server.close(done);
+    await new Promise((res, _) => server.close(res));
   });
 });
 

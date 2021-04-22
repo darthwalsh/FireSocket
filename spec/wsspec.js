@@ -33,10 +33,14 @@ if (process.env.FIRESOCKET_RUN_WS_BASELINE) {
     ));
 }
 
+function close(server) {
+  return new Promise((res, _) => server.close(res));
+}
+
 function testSocket(Socket, clientArgs, serverArgs) {
   beforeEach(() => ++port);
 
-  it("client to server", async done => {
+  it("client to server", async () => {
     await database.ref().set(null);
 
     const data = [];
@@ -62,10 +66,10 @@ function testSocket(Socket, clientArgs, serverArgs) {
 
     expect(data).toEqual(["a", "b", "c"]);
 
-    server.close(done);
+    await new Promise((res, _) => server.close(res));
   });
 
-  it("server to client", async done => {
+  it("server to client", async () => {
     await database.ref().set(null);
 
     const data = [];
@@ -90,7 +94,7 @@ function testSocket(Socket, clientArgs, serverArgs) {
 
     expect(data).toEqual(["a", "b", "c"]);
 
-    server.close(done);
+    await new Promise((res, _) => server.close(res));
   });
 
   it("has readyState properties", () => {
@@ -98,7 +102,7 @@ function testSocket(Socket, clientArgs, serverArgs) {
     expect(new Socket(...clientArgs()).CONNECTING).toBe(0);
   });
 
-  it("readyState changes", async done => {
+  it("readyState changes", async () => {
     await database.ref().set(null);
 
     const client = new Socket(...clientArgs());
@@ -114,7 +118,7 @@ function testSocket(Socket, clientArgs, serverArgs) {
 
     expect(await afterOpen).toBe(Socket.OPEN);
 
-    server.close(done);
+    await new Promise((res, _) => server.close(res));
   });
 }
 
