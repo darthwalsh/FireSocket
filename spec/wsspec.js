@@ -33,10 +33,6 @@ if (process.env.FIRESOCKET_RUN_WS_BASELINE) {
     ));
 }
 
-function close(server) {
-  return new Promise((res, _) => server.close(res));
-}
-
 function testSocket(Socket, clientArgs, serverArgs) {
   beforeEach(() => ++port);
 
