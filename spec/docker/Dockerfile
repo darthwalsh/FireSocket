@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:16
 
 # https://stackoverflow.com/a/44058196/771768
 RUN apt-get update && \
