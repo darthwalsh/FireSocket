@@ -34,7 +34,7 @@
   ],
   "devDependencies": {
     "@firebase/testing": "0.20.11",
-    "@types/express": "4.17.11",
+    "@types/express": "4.17.12",
     "@types/jasmine": "3.7.4",
     "@types/node": "14.17.1",
     "@types/ws": "7.4.4",
