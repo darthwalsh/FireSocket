@@ -25,5 +25,5 @@ steps:
 secrets:
   - kmsKeyName: projects/firesocket-test/locations/global/keyRings/ring/cryptoKeys/key
     secretEnv:
-      GH_TOKEN: "CiQA9ejEtrkdcCRWwYPY4izUs76zK8E92FLpxEPgSS4uVDA0g/oSUgB0N8tIoebNUVMiuWUBx5wpuSa36GGZ51uqSvuEZkLpIbPkriWXFoHgyQbeLECTjjg6Nhv2nEhYd3T2CwInXTvoNKQJ6lMt7wkzyXroBF5rJY0="
+      GH_TOKEN: "CiQA9ejEtnIYCCaPyQyjeqCkcxdQz5zCEI/Nys9K/b9vp5KEqQ4SUQB0N8tI8si1PNyHEoIO4uaxYewf2h0UIeJJSNHfrETr5j5p7Sjw/9lZUd6lyR/wvDHzli2SlY0fc5ZaeIGETl4ycroc1jId6VBti0UFl3y5Eg=="
       NPM_TOKEN: "CiQA9ejEtlgkk+t0zVzd1UbjeBiGlSiiyi9Wli47jBYz0VNaXkkSTQB0N8tISxOa+mJQw6KGg352xRUXu7M5F/30u3nkCHvAC7PftbApWsnbLJmMYg+zJhn1AqnmFB7XN1lDQs1AgFXjdUyni1RhR6phwb9T"
