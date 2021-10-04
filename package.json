@@ -46,7 +46,7 @@
     "jasmine-reporters": "2.5.0",
     "semantic-release": "18.0.0",
     "typescript": "4.4.3",
-    "ws": "8.2.2"
+    "ws": "8.2.3"
   },
   "dependencies": {
     "firebase-admin": "^9.0.0"
