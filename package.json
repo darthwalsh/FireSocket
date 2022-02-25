@@ -40,7 +40,7 @@
     "@types/ws": "8.5.1",
     "eslint": "8.9.0",
     "eslint-config-google": "0.14.0",
-    "eslint-config-prettier": "8.3.0",
+    "eslint-config-prettier": "8.4.0",
     "firebase-tools": "10.2.1",
     "jasmine": "4.0.2",
     "jasmine-reporters": "2.5.0",
