@@ -13,3 +13,5 @@ To test in Cloud Build, the docker image needs both npm and java installed. [doc
 ```
 gcloud builds submit --config cloudbuild.yaml .
 ```
+
+- [ ] TODO Container Registry will be phased out, starting May 15, 2024. Please review the options below for how to upgrade your projects to Artifact Registry.
