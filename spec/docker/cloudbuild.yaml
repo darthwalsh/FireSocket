@@ -1,5 +1,5 @@
 steps:
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/npm-with-java8", "."]
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/npm-with-java", "."]
 images:
-  - "gcr.io/$PROJECT_ID/npm-with-java8" # TODO Container Registry will be phased out, starting May 15, 2024. Please review the options below for how to upgrade your projects to Artifact Registry.
+  - "gcr.io/$PROJECT_ID/npm-with-java"

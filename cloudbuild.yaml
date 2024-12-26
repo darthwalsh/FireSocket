@@ -13,13 +13,13 @@ steps:
         git fetch origin
         git checkout $BRANCH_NAME
         git reset --hard $COMMIT_SHA
-  - name: "gcr.io/$PROJECT_ID/npm-with-java8"
+  - name: "gcr.io/$PROJECT_ID/npm-with-java"
     args: ["install"]
-  - name: "gcr.io/$PROJECT_ID/npm-with-java8"
+  - name: "gcr.io/$PROJECT_ID/npm-with-java"
     args: ["run", "build"]
-  - name: "gcr.io/$PROJECT_ID/npm-with-java8"
+  - name: "gcr.io/$PROJECT_ID/npm-with-java"
     args: ["test"]
-  - name: "gcr.io/$PROJECT_ID/npm-with-java8"
+  - name: "gcr.io/$PROJECT_ID/npm-with-java"
     args: ["run", "semantic-release"]
     secretEnv: ["GH_TOKEN", "NPM_TOKEN"]
 secrets:
