@@ -1,11 +1,9 @@
-FROM node:16
+FROM node:18-slim
 
-# https://stackoverflow.com/a/44058196/771768
-RUN apt-get update && \
-    apt-get install -y openjdk-11-jre-headless && \
-    apt-get clean
-
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-RUN export JAVA_HOME
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        default-jre \
+        git \
+    && rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["npm"]

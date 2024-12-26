@@ -11,7 +11,6 @@ Other than npm dependencies, the local version of firebase installed with `@fire
 To test in Cloud Build, the docker image needs both npm and java installed. [docker/Dockerfile](docker/Dockerfile) specifies how to create such an image, and you can use Cloud Build to publish the image by running
 
 ```
+export CLOUDSDK_CORE_PROJECT=firesocket-test
 gcloud builds submit --config cloudbuild.yaml .
 ```
-
-- [ ] TODO Container Registry will be phased out, starting May 15, 2024. Please review the options below for how to upgrade your projects to Artifact Registry.
