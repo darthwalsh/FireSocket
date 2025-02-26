@@ -7,6 +7,7 @@ steps:
         set -eux
 
         # cloudbuild doesn't check out the .git directory with full history
+        # MAYBE 2025-cloudbuild [supports git history](https://cloud.google.com/build/docs/building/manage-dependencies) with `depth: -1` so try removing workaround:
         shopt -s dotglob && rm -rf *
         git init
         git remote add origin https://github.com/darthwalsh/FireSocket.git
